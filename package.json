@@ -6,7 +6,8 @@
   "typings": "dist/vott-react.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "build": "webpack  --mode=production",
+    "storybook": "start-storybook -p 9001"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,8 @@
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
+    "@storybook/addon-actions": "^4.0.0-alpha.20",
+    "@storybook/react": "^4.0.0-alpha.20",
     "@tulipjs/eslint-config": "^1.1.1",
     "babel-loader": "^8.0.1",
     "css-loader": "^1.0.0",
@@ -37,5 +40,9 @@
     "url-loader": "^1.1.1",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0"
+  },
+  "dependencies": {
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
   }
 }
