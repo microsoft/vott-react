@@ -12,7 +12,7 @@ const defaultValues = {
     tagColors: defaultTagColors,
     delimiters: [KeyCodes.comma, KeyCodes.enter],
     placeHolder: "Add new tag",
-}
+};
 
 /**
  * Interface for model required to work with lower level

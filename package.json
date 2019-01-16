@@ -47,6 +47,9 @@
   },
   "dependencies": {
     "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react-dom": "^16.4.2",
+    "react-jsonschema-form": "^1.2.0",
+    "react-tag-input": "^6.1.0",
+    "reactstrap": "^7.1.0"
   }
 }
