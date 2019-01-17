@@ -8,7 +8,7 @@ The main components are:
 
 Supporting components, grouped in main component folder, include:
   * Asset Preview for loading photo or video
-	* Tags Input for adding tags to tag manager
+  * Tags Input for adding tags to tag manager
   * Editor toolbar for choosing selection style
 
 Components may be viewed in a browser using Storybook by cloning the repo and running:
