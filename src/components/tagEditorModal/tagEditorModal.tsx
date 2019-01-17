@@ -1,6 +1,6 @@
-import React, { RefObject } from "react";
+import React from "react";
 import Form from "react-jsonschema-form";
-import { Button, Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { ITag } from "../../models/models";
 
 // tslint:disable-next-line:no-var-requires
@@ -52,7 +52,6 @@ export interface ITagEditorModalState {
  */
 export default class TagEditorModal extends React.Component<ITagEditorModalProps, ITagEditorModalState> {
 
-    private tagEditorModal: RefObject<TagEditorModal>;
     private tagColors: {[id: string]: string};
 
     constructor(props: ITagEditorModalProps) {
@@ -68,8 +67,6 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
                 this.props.tagNameText || defaultValues.tagNameText,
                 this.props.tagColorText || defaultValues.tagColorText)
         };
-
-        this.tagEditorModal = React.createRef<TagEditorModal>();
 
         this.handleFormChange = this.handleFormChange.bind(this);
         this.handleOk = this.handleOk.bind(this);

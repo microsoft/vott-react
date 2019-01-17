@@ -1,0 +1,1 @@
+export { ITag } from "./models"

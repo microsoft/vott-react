@@ -2,7 +2,7 @@ import React from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 import { randomIntInRange } from "../../common/utils";
 import { ITag } from "../../models/models";
-import "../common.scss";
+import "../common/common.scss";
 import { KeyCodes } from "../../common/utils";
 import "./tagsInput.scss";
 // tslint:disable-next-line:no-var-requires
