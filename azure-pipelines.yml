@@ -1,7 +1,7 @@
 trigger:
-  - v2 # disable CI build for branch except v2
+  - master # disable CI build for branch except master
 pr:
-  - v2 # only kick off for pr targeting v2
+  - master # only kick off for pr targeting master
 
 jobs:
 - job: Linux
