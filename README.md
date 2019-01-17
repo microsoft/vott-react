@@ -4,12 +4,12 @@ This repository contains custom React Components designed for the Microsoft Open
 
 The main components are:
   * Drag-and-drop tag manager tool
-	* Scrolling thumbnail viewer
+  * Scrolling thumbnail viewer
 
 Supporting components, grouped in main component folder, include:
   * Asset Preview for loading photo or video
 	* Tags Input for adding tags to tag manager
-	* Editor toolbar for choosing selection style
+  * Editor toolbar for choosing selection style
 
 Components may be viewed in a browser using Storybook by cloning the repo and running:
   `npm run storybook`
@@ -18,11 +18,11 @@ Components may be viewed in a browser using Storybook by cloning the repo and ru
 
 We welcome issues and pull requests into the project. We ask that you follow these simple guidelines:
 
-##Issues
+## Issues
   * Look for duplicate issues & comment on thread if experiencing something similar
-	* Fill in template information (platform, OS, version, screenshots, etc.)
+  * Fill in template information (platform, OS, version, screenshots, etc.)
 	
-##Pull Requests
+## Pull Requests
     1. Find an issue to work on, or create a new one
     2. Fork repo, make sure you have latest changes from master
     3. Create branch following naming convention: git checkout -b issue-<###>-<short-description>.
