@@ -2,8 +2,6 @@ import React from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 import { randomIntInRange } from "../../common/utils";
 import { KeyCodes } from "../../common/utils";
-import { ITag } from "../../models/models";
-
 export const defaultValues = {
     tagColors: {
         White: "#FFFFFF",
@@ -24,73 +22,18 @@ export const defaultValues = {
     delimiters: [KeyCodes.comma, KeyCodes.enter],
     placeHolder: "Add new tag",
 };
-
-/**
- * Interface for model required to work with lower level
- * tags input component. Rather than name, uses 'id'.
- * Requires text attribute, which is used to inject
- * HTML to customize the tags
- * @member id - Unique identifier for tag (name)
- * @member text - Text to display on tag (can be HTML object)
- * @member color - Hex color of box to display left of tag name
- */
-export interface IReactTag {
-    id: string;
-    text: any;
-    color: string;
-}
-
-/**
- * Properties required for TagsInput component
- * @member tags - ITag[] or stringified ITag[]
- * @member onChange - function to call on tags change
- * @member placeHolder - Place holder for input text box.
- * Default is "Add new tag"
- * @member delimiters - Key code delimiters for creating a new tag
- * Defaults are enter (13) and comma (188)
- */
-export interface ITagsInputProps {
-    tags: ITag[];
-    onChange: (tags: ITag[]) => void;
-
-    // Props with default values
-    placeHolder?: string;
-    delimiters?: number[];
-    onTagClick?: (tag: ITag) => void;
-    onCtrlTagClick?: (tag: ITag) => void;
-    onShiftTagClick?: (tag: ITag) => void;
-    onCtrlShiftTagClick?: (tag: ITag) => void;
-}
-
-/**
- * Current state of tags input component
- * @member tags - IReactTag[] - tags used in lower level component
- * @member currentTagColorIndex - rotates initial color to apply to tags
- */
-export interface ITagsInputState {
-    tags: IReactTag[];
-    currentTagColorIndex: number;
-}
-
 /**
  * Component for creating, modifying and using tags
  */
-export default class TagsInput<T extends ITagsInputProps> extends React.Component<T, ITagsInputState> {
-
-    private tagColors: {[id: string]: string};
-    private tagColorKeys: string[];
-
+export default class TagsInput extends React.Component {
     constructor(props) {
         super(props);
-
         this.tagColors = props.tagColors || defaultValues.tagColors;
         this.tagColorKeys = Object.keys(this.tagColors);
-
         this.state = {
             tags: this.toReactTags(this.props.tags),
             currentTagColorIndex: randomIntInRange(0, this.tagColorKeys.length),
         };
-
         // UI Handlers
         this.handleTagClick = this.handleTagClick.bind(this);
         this.handleDrag = this.handleDrag.bind(this);
@@ -101,103 +44,83 @@ export default class TagsInput<T extends ITagsInputProps> extends React.Componen
         this.toReactTag = this.toReactTag.bind(this);
         this.getTag = this.getTag.bind(this);
     }
-
-    public render() {
+    render() {
         const { tags } = this.state;
-        return (
-            <div>
-                <ReactTags tags={tags}
-                    placeholder={this.props.placeHolder || defaultValues.placeHolder}
-                    autofocus={false}
-                    handleDelete={this.handleDelete}
-                    handleAddition={this.handleAddition}
-                    handleDrag={this.handleDrag}
-                    delimiters={this.props.delimiters || defaultValues.delimiters} />
-            </div>
-        );
+        return (React.createElement("div", null,
+            React.createElement(ReactTags, { tags: tags, placeholder: this.props.placeHolder || defaultValues.placeHolder, autofocus: false, handleDelete: this.handleDelete, handleAddition: this.handleAddition, handleDrag: this.handleDrag, delimiters: this.props.delimiters || defaultValues.delimiters })));
     }
-
-    public componentDidUpdate(prevProps: ITagsInputProps) {
+    componentDidUpdate(prevProps) {
         if (prevProps.tags !== this.props.tags) {
             this.setState({
                 tags: this.toReactTags(this.props.tags),
             });
         }
     }
-
     // UI Handlers
-
     /**
      * Calls the onTagClick handler if not null with clicked tag
      * @param event Click event
      */
-    protected handleTagClick(event) {
+    handleTagClick(event) {
         const text = this.getTagIdFromClick(event);
-        const tag: ITag = this.toItag(this.getTag(text));
+        const tag = this.toItag(this.getTag(text));
         if (this.props.onCtrlShiftTagClick && event.ctrlKey && event.shiftKey) {
             this.props.onCtrlShiftTagClick(tag);
-        } else if (this.props.onCtrlTagClick && event.ctrlKey) {
+        }
+        else if (this.props.onCtrlTagClick && event.ctrlKey) {
             this.props.onCtrlTagClick(tag);
-        } else if (this.props.onShiftTagClick && event.shiftKey) {
+        }
+        else if (this.props.onShiftTagClick && event.shiftKey) {
             this.props.onShiftTagClick(tag);
-        } else if (this.props.onTagClick) {
+        }
+        else if (this.props.onTagClick) {
             this.props.onTagClick(tag);
         }
     }
-
     // Helpers
-
     /**
      * Gets the tag with the given name (id)
      * @param id string name of tag. param 'id' for lower level react component
      */
-    protected getTag(id: string): IReactTag {
+    getTag(id) {
         const match = this.state.tags.find((tag) => tag.id === id);
         if (!match) {
             throw new Error(`No tag by id: ${id}`);
         }
         return match;
     }
-
     /**
      * Gets tag ID (name) from a click event
      * @param event Click event
      */
-    protected getTagIdFromClick(event): string {
+    getTagIdFromClick(event) {
         if (event.target.lastChild) {
             return event.target.lastChild.data;
         }
         return (event.target.innerText || event.currentTarget.innerText).trim();
     }
-
     /**
      * Generate necessary HTML to render tag box appropriately
      * @param name name of tag
      * @param color color of tag
      */
-    protected ReactTagHtml(name: string, color: string) {
-        return (
-            <div className="tag inline-block" onClick={(event) => this.handleTagClick(event)}>
-                <div className="tag-contents">
-                    <div className="tag-color-box" style={{ backgroundColor: color }}></div>
-                    {this.getTagSpan(name)}
-                </div>
-            </div>
-        );
+    ReactTagHtml(name, color) {
+        return (React.createElement("div", { className: "tag inline-block", onClick: (event) => this.handleTagClick(event) },
+            React.createElement("div", { className: "tag-contents" },
+                React.createElement("div", { className: "tag-color-box", style: { backgroundColor: color } }),
+                this.getTagSpan(name))));
     }
-
     /**
      * Get span element for each tag
      */
-    protected getTagSpan(name: string) {
-        return <span>{name}</span>;
+    getTagSpan(name) {
+        return React.createElement("span", null, name);
     }
-
     /**
      * Converts IReactTag to ITag
      * @param tag IReactTag to convert to ITag
      */
-    protected toItag(tag: IReactTag): ITag {
+    toItag(tag) {
         if (!tag) {
             return null;
         }
@@ -206,22 +129,18 @@ export default class TagsInput<T extends ITagsInputProps> extends React.Componen
             color: tag.color,
         };
     }
-
     /**
      * Allows for click-and-drag re-ordering of tags
      * @param tag Tag being dragged
      * @param currPos Current position of tag
      * @param newPos New position of tag
      */
-    private handleDrag(tag: IReactTag, currPos: number, newPos: number): void {
+    handleDrag(tag, currPos, newPos) {
         const tags = [...this.state.tags];
         const newTags = tags.slice();
-
         newTags.splice(currPos, 1);
         newTags.splice(newPos, 0, tag);
-
         this.updateTagsHtml(newTags);
-
         // Updating HTML is dependent upon state having most up to date
         // values. Setting filtered state and then setting state with
         // updated HTML in tags
@@ -231,15 +150,13 @@ export default class TagsInput<T extends ITagsInputProps> extends React.Componen
             tags: this.updateTagsHtml(newTags),
         }, () => this.props.onChange(this.toITags(this.state.tags))));
     }
-
     // Tag Operations
-
     /**
      * Adds new tag to state with necessary HTML for rendering
      * Sets the color of the tag to next color, rotates through each
      * @param reactTag - IReactTag - new tag to add to state
      */
-    private handleAddition(reactTag: IReactTag): void {
+    handleAddition(reactTag) {
         reactTag.color = this.tagColors[this.tagColorKeys[this.state.currentTagColorIndex]];
         this.addHtml(reactTag);
         this.setState((prevState) => {
@@ -249,19 +166,17 @@ export default class TagsInput<T extends ITagsInputProps> extends React.Componen
             };
         }, () => this.props.onChange(this.toITags(this.state.tags)));
     }
-
     /**
      * Deletes tag from state
      * Explicitly prevents deletion with backspace key
      * @param i index of tag being deleted
      * @param event delete event
      */
-    private handleDelete(i: number, event): void {
+    handleDelete(i, event) {
         if (event.keyCode === KeyCodes.backspace) {
             return;
         }
         const tags = this.state.tags.filter((tag, index) => index !== i);
-
         // Updating HTML is dependent upon state having most up to date
         // values. Setting filtered state and then setting state with
         // updated HTML in tags
@@ -271,12 +186,11 @@ export default class TagsInput<T extends ITagsInputProps> extends React.Componen
             tags: this.updateTagsHtml(tags),
         }, () => this.props.onChange(this.toITags(this.state.tags))));
     }
-
     /**
      * Converts ITag to IReactTag
      * @param tag ITag to convert to IReactTag
      */
-    private toReactTag(tag: ITag): IReactTag {
+    toReactTag(tag) {
         if (!tag) {
             return null;
         }
@@ -286,8 +200,7 @@ export default class TagsInput<T extends ITagsInputProps> extends React.Componen
             color: tag.color,
         };
     }
-
-    private updateTagsHtml(tags: IReactTag[]): IReactTag[] {
+    updateTagsHtml(tags) {
         const newTags = [];
         for (const tag of tags) {
             this.addHtml(tag);
@@ -295,28 +208,26 @@ export default class TagsInput<T extends ITagsInputProps> extends React.Componen
         }
         return newTags;
     }
-
     /**
      * Adds necessary HTML for tag to render correctly
      * @param tag tag needing Html
      */
-    private addHtml(tag: IReactTag): void {
+    addHtml(tag) {
         tag.text = this.ReactTagHtml(tag.id, tag.color);
     }
-
     /**
      * Convert array of ITags to IReactTags
      * @param props properties for component, contains tags in ITag format
      */
-    private toReactTags(tags: ITag[]): IReactTag[] {
-        return tags ? tags.map((element: ITag) => this.toReactTag(element)) : [];
+    toReactTags(tags) {
+        return tags ? tags.map((element) => this.toReactTag(element)) : [];
     }
-
     /**
      * Convert array of IReactTags to ITags
      * @param tags array of IReactTags to convert to ITags
      */
-    private toITags(tags: IReactTag[]): ITag[] {
-        return tags.map((element: IReactTag) => this.toItag(element));
+    toITags(tags) {
+        return tags.map((element) => this.toItag(element));
     }
 }
+//# sourceMappingURL=tagsInput.js.map

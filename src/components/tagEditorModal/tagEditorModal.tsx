@@ -1,12 +1,27 @@
-import React, { RefObject } from "react";
+import React from "react";
 import Form from "react-jsonschema-form";
-import { Button, Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { ITag } from "../../models/models";
 
-// tslint:disable-next-line:no-var-requires
 const defaultValues = {
-    tagColors: require("../tagsInput/defaultTagColors.json"),
+    tagColors: {
+        White: "#FFFFFF",
+        Gray: "#808080",
+        Red: "#FF0000",
+        Maroon: "#800000",
+        Yellow: "#FFFF00",
+        Olive: "#808000",
+        Lime: "#00FF00",
+        Green: "#008000",
+        Aqua: "#00FFFF",
+        Teal: "#008080",
+        Blue: "#0000FF",
+        Navy: "#000080",
+        Fuschia: "#FF00FF",
+        Purple: "#800080",
+    },
     tagNameText: "Tag",
+    editTagText: "Edit Tag",
     tagColorText: "Color",
     saveText: "Save",
     cancelText: "Cancel",
@@ -26,6 +41,7 @@ export interface ITagEditorModalProps {
     tagColors?: {[id: string]: string};
     tagNameText?: string;
     tagColorText?: string;
+    editTagText?: string;
     saveText?: string;
     cancelText?: string;
 
@@ -50,7 +66,6 @@ export interface ITagEditorModalState {
  */
 export default class TagEditorModal extends React.Component<ITagEditorModalProps, ITagEditorModalState> {
 
-    private tagEditorModal: RefObject<TagEditorModal>;
     private tagColors: {[id: string]: string};
 
     constructor(props: ITagEditorModalProps) {
@@ -67,8 +82,6 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
                 this.props.tagColorText || defaultValues.tagColorText),
         };
 
-        this.tagEditorModal = React.createRef<TagEditorModal>();
-
         this.handleFormChange = this.handleFormChange.bind(this);
         this.handleOk = this.handleOk.bind(this);
     }
@@ -79,7 +92,9 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
         return (
             <div>
                 <Modal isOpen={this.state.isOpen} centered={true}>
-                    <ModalHeader toggle={this.props.onCancel} close={closeBtn}>Edit Tag</ModalHeader>
+                    <ModalHeader toggle={this.props.onCancel} close={closeBtn}>
+                        {this.props.editTagText || defaultValues.editTagText}
+                    </ModalHeader>
                     <ModalBody>
                         <Form
                             schema={this.state.formSchema}
