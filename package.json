@@ -17,6 +17,7 @@
   "scripts": {
     "start-js": "react-scripts-ts start",
     "start": "npm-run-all -p watch-sass-to-css start-js",
+    "compile": "tsc",
     "build-js": "react-scripts-ts build",
     "build": "npm-run-all -p build-sass-to-css build-js",
     "build-lib": "tsc && npm run build-sass-to-css && npm run copy-css-to-lib",
