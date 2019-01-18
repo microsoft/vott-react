@@ -2,8 +2,8 @@
   "name": "vott-react",
   "version": "0.1.0",
   "private": true,
-  "main": "build/lib/components/index.js",
-  "types": "build/lib/components/index.d.ts",
+  "main": "dist/components/index.js",
+  "types": "dist/components/index.d.ts",
   "engines": {
     "node": ">=8.0.0"
   },
@@ -39,8 +39,8 @@
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
     "copy-css-to-lib": "npm-run-all -s copy-base-css copy-component-css",
-    "copy-base-css": "cpx \"./src/**/*.css\" ./build/lib/",
-    "copy-component-css": "cpx \"./src/components/**/*.css\" ./build/lib/components",
+    "copy-base-css": "cpx \"./src/**/*.css\" ./dist/",
+    "copy-component-css": "cpx \"./src/components/**/*.css\" ./dist/components",
     "build-sass-to-css": "node-sass-chokidar src/ -o src/",
     "watch-sass-to-css": "node-sass-chokidar src/ -o src/ --watch --recursive"
   },
@@ -62,6 +62,6 @@
     "typescript": "^3.2.2"
   },
   "files": [
-    "build/lib"
+    "dist"
   ]
 }

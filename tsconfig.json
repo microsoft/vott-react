@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "build/lib",
+    "outDir": "dist",
     "module": "esnext",
     "target": "es6",
     "lib": ["es5","es6", "dom"],
@@ -24,7 +24,7 @@
   },
   "exclude": [
     "node_modules",
-    "build",
+    "dist",
     "scripts",
     "acceptance-tests",
     "webpack",
