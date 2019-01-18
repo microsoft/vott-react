@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "build/lib",
     "module": "esnext",
-    "target": "es5",
+    "target": "es6",
     "lib": ["es5","es6", "dom"],
     "sourceMap": true,
     "skipLibCheck": true,
@@ -18,6 +18,7 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "declaration": true,
+    "noEmit": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
   },
@@ -32,7 +33,6 @@
     "**/*.spec.ts",
     "**/*.test.ts",
     "config",
-    "dist"
   ],
   "include": [
     "src"
