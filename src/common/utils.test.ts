@@ -1,4 +1,4 @@
-import { randomIntInRange, createQueryString } from "./utils";
+import { createQueryString, randomIntInRange } from "./utils";
 
 describe("Helper functions", () => {
 

@@ -115,10 +115,10 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
         );
     }
 
-    public open(openTag: ITag): void {
+    public open(tag: ITag): void {
         this.setState({
             isOpen: true,
-            tag: openTag,
+            tag,
         });
     }
 

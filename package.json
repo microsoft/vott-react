@@ -20,6 +20,8 @@
     "build-js": "react-scripts-ts build",
     "build": "npm-run-all -p build-sass-to-css build-js",
     "build-lib": "tsc && npm run build-sass-to-css && npm run copy-css-to-lib",
+    "pretest": "./node_modules/.bin/tslint 'src/**/*.ts*'",
+    "lintfix": "./node_modules/.bin/tslint 'src/**/*.ts*' --fix",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
     "copy-css-to-lib": "npm-run-all -s copy-base-css copy-component-css",
