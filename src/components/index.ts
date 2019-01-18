@@ -1,2 +1,2 @@
-export * from "./tagsInput"
-export * from "./tagEditorModal"
+export * from "./tagsInput";
+export * from "./tagEditorModal";

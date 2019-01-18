@@ -5,27 +5,27 @@ import { ITag } from "../../models/models";
 
 const defaultValues = {
     tagColors: {
-        White: "#FFFFFF", 
-        Gray: "#808080", 
-        Red: "#FF0000", 
-        Maroon: "#800000", 
-        Yellow: "#FFFF00", 
+        White: "#FFFFFF",
+        Gray: "#808080",
+        Red: "#FF0000",
+        Maroon: "#800000",
+        Yellow: "#FFFF00",
         Olive: "#808000",
-        Lime: "#00FF00", 
-        Green: "#008000", 
-        Aqua: "#00FFFF", 
-        Teal: "#008080", 
-        Blue: "#0000FF", 
-        Navy: "#000080", 
+        Lime: "#00FF00",
+        Green: "#008000",
+        Aqua: "#00FFFF",
+        Teal: "#008080",
+        Blue: "#0000FF",
+        Navy: "#000080",
         Fuschia: "#FF00FF",
-        Purple: "#800080"
+        Purple: "#800080",
     },
     tagNameText: "Tag",
     editTagText: "Edit Tag",
     tagColorText: "Color",
     saveText: "Save",
-    cancelText: "Cancel"
-}
+    cancelText: "Cancel",
+};
 
 /**
  * Properties for Tag Editor Modal
@@ -36,9 +36,9 @@ const defaultValues = {
  */
 export interface ITagEditorModalProps {
     onOk: (tag: ITag) => void;
-    
+
     // Props with default params
-    tagColors?: {[id: string]: string}
+    tagColors?: {[id: string]: string};
     tagNameText?: string;
     tagColorText?: string;
     editTagText?: string;
@@ -79,7 +79,7 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
             formSchema: this.createFormSchema(
                 this.tagColors,
                 this.props.tagNameText || defaultValues.tagNameText,
-                this.props.tagColorText || defaultValues.tagColorText)
+                this.props.tagColorText || defaultValues.tagColorText),
         };
 
         this.handleFormChange = this.handleFormChange.bind(this);
@@ -118,7 +118,7 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
     public open(tag: ITag): void {
         this.setState({
             isOpen: true,
-            tag: tag
+            tag,
         });
     }
 
@@ -126,10 +126,10 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
         this.setState({
             isOpen: false,
         }, () => {
-            if(this.props.onCancel){
+            if (this.props.onCancel) {
                 this.props.onCancel();
             }
-        })
+        });
     }
 
     /**
@@ -154,7 +154,7 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
     private createFormSchema(colors: {[id: string]: string}, tagNameText: string, tagColorText: string) {
         const keys = Object.keys(colors);
         const values: string[] = [];
-        for(const key of keys) {
+        for (const key of keys) {
             values.push(colors[key]);
         }
         return {
@@ -162,17 +162,16 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
             properties: {
                 name: {
                     title: tagNameText,
-                    type: "string"
+                    type: "string",
                 },
                 color: {
                     title: tagColorText,
                     type: "string",
                     enum: keys,
                     default: values[0],
-                    enumNames: values
-                }
-            }
-        }
+                    enumNames: values,
+                },
+            },
+        };
     }
 }
-
