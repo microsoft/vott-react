@@ -23,13 +23,13 @@
     "pretest": "./node_modules/.bin/tslint 'src/**/*.ts*'",
     "lintfix": "./node_modules/.bin/tslint 'src/**/*.ts*' --fix",
     "test": "react-scripts-ts test --env=jsdom",
+    "preinstall": "build-lib",
     "eject": "react-scripts-ts eject",
     "copy-css-to-lib": "npm-run-all -s copy-base-css copy-component-css",
     "copy-base-css": "cpx \"./src/**/*.css\" ./build/lib/",
     "copy-component-css": "cpx \"./src/components/**/*.css\" ./build/lib/components",
     "build-sass-to-css": "node-sass-chokidar src/ -o src/",
-    "watch-sass-to-css": "node-sass-chokidar src/ -o src/ --watch --recursive",
-    "lintfix": "./node_modules/.bin/tslint 'src/**/*.ts' --fix"
+    "watch-sass-to-css": "node-sass-chokidar src/ -o src/ --watch --recursive"
   },
   "devDependencies": {
     "@types/jest": "23.3.9",
