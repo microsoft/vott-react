@@ -23,7 +23,7 @@
     "pretest": "./node_modules/.bin/tslint 'src/**/*.ts*'",
     "lintfix": "./node_modules/.bin/tslint 'src/**/*.ts*' --fix",
     "test": "react-scripts-ts test --env=jsdom",
-    "preinstall": "build-lib",
+    "preinstall": "npm run build-lib",
     "eject": "react-scripts-ts eject",
     "copy-css-to-lib": "npm-run-all -s copy-base-css copy-component-css",
     "copy-base-css": "cpx \"./src/**/*.css\" ./build/lib/",
