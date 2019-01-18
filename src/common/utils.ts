@@ -7,7 +7,7 @@ import Guard from "./guard";
  */
 export function randomIntInRange(min, max) {
     if (min > max) {
-        throw new Error(`min (${min}) can't be bigger than max (${max})`);
+        throw new Error(`min (${min}) can"t be bigger than max (${max})`);
     }
     if (min === max) {
         return min;
