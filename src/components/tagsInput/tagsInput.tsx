@@ -6,24 +6,24 @@ import { KeyCodes } from "../../common/utils";
 
 export const defaultValues = {
     tagColors: {
-        White: "#FFFFFF", 
-        Gray: "#808080", 
-        Red: "#FF0000", 
-        Maroon: "#800000", 
-        Yellow: "#FFFF00", 
+        White: "#FFFFFF",
+        Gray: "#808080",
+        Red: "#FF0000",
+        Maroon: "#800000",
+        Yellow: "#FFFF00",
         Olive: "#808000",
-        Lime: "#00FF00", 
-        Green: "#008000", 
-        Aqua: "#00FFFF", 
-        Teal: "#008080", 
-        Blue: "#0000FF", 
-        Navy: "#000080", 
+        Lime: "#00FF00",
+        Green: "#008000",
+        Aqua: "#00FFFF",
+        Teal: "#008080",
+        Blue: "#0000FF",
+        Navy: "#000080",
         Fuschia: "#FF00FF",
-        Purple: "#800080"
+        Purple: "#800080",
     },
     delimiters: [KeyCodes.comma, KeyCodes.enter],
     placeHolder: "Add new tag",
-}
+};
 
 /**
  * Interface for model required to work with lower level
@@ -59,7 +59,7 @@ export interface ITagsInputProps {
     onTagClick?: (tag: ITag) => void;
     onCtrlTagClick?: (tag: ITag) => void;
     onShiftTagClick?: (tag: ITag) => void;
-    onCtrlShiftTagClick?: (tag: ITag) => void; 
+    onCtrlShiftTagClick?: (tag: ITag) => void;
 }
 
 /**
@@ -139,14 +139,11 @@ export default class TagsInput<T extends ITagsInputProps> extends React.Componen
         const tag: ITag = this.toItag(this.getTag(text));
         if (this.props.onCtrlShiftTagClick && event.ctrlKey && event.shiftKey) {
             this.props.onCtrlShiftTagClick(tag);
-        }
-        else if(this.props.onCtrlTagClick && event.ctrlKey) {
+        } else if (this.props.onCtrlTagClick && event.ctrlKey) {
             this.props.onCtrlTagClick(tag);
-        }
-        else if(this.props.onShiftTagClick && event.shiftKey) {
+        } else if (this.props.onShiftTagClick && event.shiftKey) {
             this.props.onShiftTagClick(tag);
-        }
-        else if(this.props.onTagClick) {
+        } else if (this.props.onTagClick) {
             this.props.onTagClick(tag);
         }
     }

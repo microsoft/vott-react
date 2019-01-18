@@ -2,8 +2,8 @@
   "name": "vott-react",
   "version": "0.1.0",
   "private": true,
-  "main": "build/lib/components/index.js",
-  "types": "build/lib/components/index.d.ts",
+  "main": "dist/components/index.js",
+  "types": "dist/components/index.d.ts",
   "engines": {
     "node": ">=8.0.0"
   },
@@ -16,12 +16,19 @@
   },
   "scripts": {
     "start-js": "react-scripts-ts start",
-    "start": "npm-run-all -p start-js",
+    "start": "npm-run-all -p watch-sass-to-css start-js",
     "build-js": "react-scripts-ts build",
-    "build": "npm-run-all -p build-js",
-    "build-lib": "tsc",
+    "build": "npm-run-all -p build-sass-to-css build-js",
+    "build-lib": "tsc && npm run build-sass-to-css && npm run copy-css-to-lib",
+    "pretest": "./node_modules/.bin/tslint 'src/**/*.ts*'",
+    "lintfix": "./node_modules/.bin/tslint 'src/**/*.ts*' --fix",
     "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "eject": "react-scripts-ts eject",
+    "copy-css-to-lib": "npm-run-all -s copy-base-css copy-component-css",
+    "copy-base-css": "cpx \"./src/**/*.css\" ./dist/",
+    "copy-component-css": "cpx \"./src/components/**/*.css\" ./dist/components",
+    "build-sass-to-css": "node-sass-chokidar src/ -o src/",
+    "watch-sass-to-css": "node-sass-chokidar src/ -o src/ --watch --recursive"
   },
   "devDependencies": {
     "@types/jest": "23.3.9",
@@ -41,7 +48,7 @@
     "typescript": "^3.2.2"
   },
   "files": [
-    "build/lib"
+    "dist"
   ],
   "resolutions": {
     "@types/react": "^16.7.20"
