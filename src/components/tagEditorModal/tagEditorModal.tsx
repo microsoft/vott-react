@@ -31,8 +31,8 @@ const defaultValues = {
  * Properties for Tag Editor Modal
  * @member tag - Tag for editing
  * @member showModal - Modal is visible
- * @member onOk - Function to call when 'Ok' button is clicked
- * @member onCancel - Function to call when 'Cancel' button is clicked or modal closed
+ * @member onOk - Function to call when "Ok" button is clicked
+ * @member onCancel - Function to call when "Cancel" button is clicked or modal closed
  */
 export interface ITagEditorModalProps {
     onOk: (tag: ITag) => void;
@@ -145,7 +145,7 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
     }
 
     /**
-     * Called when 'Ok' is clicked
+     * Called when "Ok" is clicked
      */
     private handleOk(e) {
         this.props.onOk(this.state.tag);

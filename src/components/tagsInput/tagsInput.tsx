@@ -27,7 +27,7 @@ export const defaultValues = {
 
 /**
  * Interface for model required to work with lower level
- * tags input component. Rather than name, uses 'id'.
+ * tags input component. Rather than name, uses "id".
  * Requires text attribute, which is used to inject
  * HTML to customize the tags
  * @member id - Unique identifier for tag (name)
@@ -152,7 +152,7 @@ export default class TagsInput<T extends ITagsInputProps> extends React.Componen
 
     /**
      * Gets the tag with the given name (id)
-     * @param id string name of tag. param 'id' for lower level react component
+     * @param id string name of tag. param "id" for lower level react component
      */
     protected getTag(id: string): IReactTag {
         const match = this.state.tags.find((tag) => tag.id === id);
@@ -254,20 +254,20 @@ export default class TagsInput<T extends ITagsInputProps> extends React.Componen
     }
 
     /**
-     * Update an existing tag, called after clicking 'OK' in modal
+     * Update an existing tag, called after clicking "OK" in modal
      * @param newTag Edited version of tag
      */
     private handleEditedTag(newTag: ITag): void {
         const newReactTag = this.toReactTag(newTag);
         /**
-         * If this was a name change (ids are not equal), don't allow
+         * If this was a name change (ids are not equal), don"t allow
          * the new tag to be named with a name that currently exists
          * in other tags. Probably should include an error message.
-         * For now, just doesn't allow the action to take place. Modal
-         * won't close and user won't be able to set the name. This is
+         * For now, just doesn"t allow the action to take place. Modal
+         * won"t close and user won"t be able to set the name. This is
          * similar to how the component handles duplicate naming at the
          * creation level. If user enters name that already exists in
-         * tags, the component just doesn't do anything.
+         * tags, the component just doesn"t do anything.
          */
         if (newReactTag.id !== this.state.selectedTag.id && this.state.tags.some((t) => t.id === newReactTag.id)) {
             return;
