@@ -16,17 +16,12 @@
   },
   "scripts": {
     "start-js": "react-scripts-ts start",
-    "start": "npm-run-all -p watch-sass-to-css start-js",
+    "start": "npm-run-all -p start-js",
     "build-js": "react-scripts-ts build",
-    "build": "npm-run-all -p build-sass-to-css build-js",
-    "build-lib": "tsc && npm run build-sass-to-css && npm run copy-css-to-lib",
+    "build": "npm-run-all -p build-js",
+    "build-lib": "tsc",
     "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject",
-    "copy-css-to-lib": "npm-run-all -s copy-base-css copy-component-css",
-    "copy-base-css": "cpx \"./src/**/*.css\" ./build/lib/",
-    "copy-component-css": "cpx \"./src/components/**/*.css\" ./build/lib/components",
-    "build-sass-to-css": "node-sass-chokidar src/ -o src/",
-    "watch-sass-to-css": "node-sass-chokidar src/ -o src/ --watch --recursive"
+    "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
     "@types/jest": "23.3.9",
