@@ -47,5 +47,8 @@
   },
   "files": [
     "build/lib"
-  ]
+  ],
+  "resolutions": {
+    "@types/react": "^16.7.20"
+  }
 }

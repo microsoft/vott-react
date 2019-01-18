@@ -3,9 +3,23 @@ import Form from "react-jsonschema-form";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { ITag } from "../../models/models";
 
-// tslint:disable-next-line:no-var-requires
 const defaultValues = {
-    tagColors: require("../tagsInput/defaultTagColors.json"),
+    tagColors: {
+        White: "#FFFFFF", 
+        Gray: "#808080", 
+        Red: "#FF0000", 
+        Maroon: "#800000", 
+        Yellow: "#FFFF00", 
+        Olive: "#808000",
+        Lime: "#00FF00", 
+        Green: "#008000", 
+        Aqua: "#00FFFF", 
+        Teal: "#008080", 
+        Blue: "#0000FF", 
+        Navy: "#000080", 
+        Fuschia: "#FF00FF",
+        Purple: "#800080"
+    },
     tagNameText: "Tag",
     editTagText: "Edit Tag",
     tagColorText: "Color",
