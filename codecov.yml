@@ -1,11 +1,5 @@
 # Validate changes
-
 # cat .codecov.yml | curl --data-binary @- https://codecov.io/validate
-language: node_js
-scripts:
-  - npm install codecov -g
-after_success:
-  - codecov
 
 comment:  on # enable pull request comment
 coverage:
