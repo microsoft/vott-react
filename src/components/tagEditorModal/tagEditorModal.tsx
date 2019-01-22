@@ -21,7 +21,7 @@ const defaultValues = {
  * @member onCancel - Function to call when "Cancel" button is clicked or modal closed
  */
 export interface ITagEditorModalProps {
-    onOk: (tag: ITag) => void;
+    onOk: (oldTag: ITag, newTag: ITag) => void;
 
     // Props with default params
     tagColors?: {[id: string]: string};
@@ -42,7 +42,8 @@ export interface ITagEditorModalProps {
  * @member isOpen - Modal is open
  */
 export interface ITagEditorModalState {
-    tag: ITag;
+    originalTag: ITag;
+    currentTag: ITag;
     isOpen: boolean;
     formSchema: any;
 }
@@ -60,7 +61,8 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
         this.tagColors = props.tagColors || defaultValues.tagColors;
 
         this.state = {
-            tag: null,
+            originalTag: null,
+            currentTag: null,
             isOpen: props.show,
             formSchema: this.createFormSchema(
                 this.tagColors,
@@ -70,21 +72,23 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
 
         this.handleFormChange = this.handleFormChange.bind(this);
         this.handleOk = this.handleOk.bind(this);
+        this.open = this.open.bind(this);
+        this.close = this.close.bind(this);
     }
 
     public render() {
-        const closeBtn = <button className="close" onClick={this.props.onCancel}>&times;</button>;
+        const closeBtn = <button className="close" onClick={this.close}>&times;</button>;
 
         return (
             <div>
                 <Modal isOpen={this.state.isOpen} centered={true}>
-                    <ModalHeader toggle={this.props.onCancel} close={closeBtn}>
+                    <ModalHeader toggle={this.close} close={closeBtn}>
                         {this.props.editTagText || defaultValues.editTagText}
                     </ModalHeader>
                     <ModalBody>
                         <Form
                             schema={this.state.formSchema}
-                            formData={this.state.tag}
+                            formData={this.state.currentTag}
                             onChange={this.handleFormChange}>
                         </Form>
                     </ModalBody>
@@ -94,7 +98,7 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
                             onClick={this.handleOk}>{this.props.saveText || defaultValues.saveText}</Button>
                         <Button
                             color="secondary"
-                            onClick={this.props.onCancel}>{this.props.cancelText || defaultValues.cancelText}</Button>
+                            onClick={this.close}>{this.props.cancelText || defaultValues.cancelText}</Button>
                     </ModalFooter>
                 </Modal>
             </div>
@@ -104,7 +108,8 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
     public open(tag: ITag): void {
         this.setState({
             isOpen: true,
-            tag,
+            originalTag: tag,
+            currentTag: tag,
         });
     }
 
@@ -123,7 +128,7 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
      */
     private handleFormChange(args) {
         this.setState({
-            tag: {
+            currentTag: {
                 name: args.formData.name,
                 color: args.formData.color,
             },
@@ -134,7 +139,7 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
      * Called when "Ok" is clicked
      */
     private handleOk(e) {
-        this.props.onOk(this.state.tag);
+        this.props.onOk(this.state.originalTag, this.state.currentTag);
     }
 
     private createFormSchema(colors: {[id: string]: string}, tagNameText: string, tagColorText: string) {

@@ -1,8 +1,9 @@
 import React from "react";
 import { WithContext as ReactTags } from "react-tag-input";
-import { KeyCodes, randomIntInRange } from "../../common/utils";
-import { ITag } from "../../models/models";
-import { tagColors } from "../common/tagColors";
+import { KeyCodes, randomIntInRange } from "../../../../common/utils";
+import { ITag } from "../../../../models/applicationState";
+import { tagColors } from "../tagEditorModal/tagColors";
+import "./tagsInput.scss";
 
 export const defaultValues = {
     tagColors,
@@ -34,7 +35,7 @@ export interface IReactTag {
  * @member delimiters - Key code delimiters for creating a new tag
  * Defaults are enter (13) and comma (188)
  */
-export interface ITagsInputProps {
+export interface ITagsInputProps extends React.Props<TagsInput<ITagsInputProps>>{
     tags: ITag[];
     onChange: (tags: ITag[]) => void;
 
@@ -55,7 +56,6 @@ export interface ITagsInputProps {
 export interface ITagsInputState {
     tags: IReactTag[];
     currentTagColorIndex: number;
-    selectedTag: IReactTag;
 }
 
 /**
@@ -75,7 +75,6 @@ export default class TagsInput<T extends ITagsInputProps> extends React.Componen
         this.state = {
             tags: this.toReactTags(this.props.tags),
             currentTagColorIndex: randomIntInRange(0, this.tagColorKeys.length),
-            selectedTag: null,
         };
 
         // UI Handlers
@@ -83,7 +82,7 @@ export default class TagsInput<T extends ITagsInputProps> extends React.Componen
         this.handleDrag = this.handleDrag.bind(this);
         // Tag edit handlers
         this.handleAddition = this.handleAddition.bind(this);
-        this.handleEditedTag = this.handleEditedTag.bind(this);
+        this.updateTag = this.updateTag.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         // Helpers
         this.toReactTag = this.toReactTag.bind(this);
@@ -242,7 +241,7 @@ export default class TagsInput<T extends ITagsInputProps> extends React.Componen
      * Update an existing tag, called after clicking "OK" in modal
      * @param newTag Edited version of tag
      */
-    private handleEditedTag(newTag: ITag): void {
+    public updateTag(oldTag: ITag, newTag: ITag): void {
         const newReactTag = this.toReactTag(newTag);
         /**
          * If this was a name change (ids are not equal), don"t allow
@@ -254,14 +253,14 @@ export default class TagsInput<T extends ITagsInputProps> extends React.Componen
          * creation level. If user enters name that already exists in
          * tags, the component just doesn"t do anything.
          */
-        if (newReactTag.id !== this.state.selectedTag.id && this.state.tags.some((t) => t.id === newReactTag.id)) {
+        if (newReactTag.id !== oldTag.name && this.state.tags.some((t) => t.id === newReactTag.id)) {
             return;
         }
         this.addHtml(newReactTag);
         this.setState((prevState) => {
             return {
                 tags: prevState.tags.map((reactTag) => {
-                    if (reactTag.id === prevState.selectedTag.id) {
+                    if (reactTag.id === oldTag.name) {
                         reactTag = newReactTag;
                     }
                     return reactTag;
