@@ -35,7 +35,7 @@ export interface IReactTag {
  * @member delimiters - Key code delimiters for creating a new tag
  * Defaults are enter (13) and comma (188)
  */
-export interface ITagsInputProps extends React.Props<TagsInput<ITagsInputProps>> {
+export interface ITagsInputProps extends React.Props<TagsInput> {
     tags: ITag[];
     onChange: (tags: ITag[]) => void;
 
@@ -61,7 +61,7 @@ export interface ITagsInputState {
 /**
  * Component for creating, modifying and using tags
  */
-export default class TagsInput<T extends ITagsInputProps> extends React.Component<T, ITagsInputState> {
+export default class TagsInput extends React.Component<ITagsInputProps, ITagsInputState> {
 
     private tagColors: {[id: string]: string};
     private tagColorKeys: string[];
