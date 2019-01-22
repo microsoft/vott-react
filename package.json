@@ -20,7 +20,7 @@
     "clean": "rm -rf build",
     "build-js": "react-scripts-ts build",
     "build": "npm-run-all -p build-sass-to-css build-js",
-    "build-lib": "tsc && npm run build-sass-to-css && npm run copy-css-to-lib",
+    "build-lib": "npm run clean && tsc && npm run build-sass-to-css && npm run copy-css-to-lib",
     "pretest": "./node_modules/.bin/tslint 'src/**/*.ts*'",
     "lintfix": "./node_modules/.bin/tslint 'src/**/*.ts*' --fix",
     "test": "react-scripts-ts test --env=jsdom",
