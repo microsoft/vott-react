@@ -26,7 +26,7 @@
     "build-lib": "npm run clean && tsc && npm run build-sass-to-css && npm run copy-css-to-lib",
     "pretest": "./node_modules/.bin/tslint 'src/**/*.ts*'",
     "lintfix": "./node_modules/.bin/tslint 'src/**/*.ts*' --fix",
-    "test": "react-scripts-ts test --env=jsdom --silent",
+    "test": "react-scripts-ts test --env=jsdom --silent src/",
     "test:ci": "cross-env CI=true npm run test",
     "test:coverage": "npm run test -- --coverage",
     "eject": "react-scripts-ts eject",

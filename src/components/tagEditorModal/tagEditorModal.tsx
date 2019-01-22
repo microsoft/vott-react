@@ -91,6 +91,9 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
                             schema={this.state.formSchema}
                             formData={this.state.currentTag}
                             onChange={this.handleFormChange}>
+                            <button style={{
+                                display: "none"
+                            }}  type="submit"></button>
                         </Form>
                     </ModalBody>
                     <ModalFooter>
