@@ -87,6 +87,7 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
                     </ModalHeader>
                     <ModalBody>
                         <Form
+                            idPrefix={"modal-form"}
                             schema={this.state.formSchema}
                             formData={this.state.currentTag}
                             onChange={this.handleFormChange}>
