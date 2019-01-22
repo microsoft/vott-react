@@ -1,26 +1,11 @@
 import React from "react";
 import { WithContext as ReactTags } from "react-tag-input";
-import { randomIntInRange } from "../../common/utils";
+import { KeyCodes, randomIntInRange } from "../../common/utils";
 import { ITag } from "../../models/models";
-import { KeyCodes } from "../../common/utils";
+import { tagColors } from "../common/tagColors";
 
 export const defaultValues = {
-    tagColors: {
-        White: "#FFFFFF",
-        Gray: "#808080",
-        Red: "#FF0000",
-        Maroon: "#800000",
-        Yellow: "#FFFF00",
-        Olive: "#808000",
-        Lime: "#00FF00",
-        Green: "#008000",
-        Aqua: "#00FFFF",
-        Teal: "#008080",
-        Blue: "#0000FF",
-        Navy: "#000080",
-        Fuschia: "#FF00FF",
-        Purple: "#800080",
-    },
+    tagColors,
     delimiters: [KeyCodes.comma, KeyCodes.enter],
     placeHolder: "Add new tag",
 };

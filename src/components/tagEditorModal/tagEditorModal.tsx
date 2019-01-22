@@ -2,24 +2,10 @@ import React from "react";
 import Form from "react-jsonschema-form";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { ITag } from "../../models/models";
+import { tagColors } from "../common/tagColors";
 
 const defaultValues = {
-    tagColors: {
-        White: "#FFFFFF",
-        Gray: "#808080",
-        Red: "#FF0000",
-        Maroon: "#800000",
-        Yellow: "#FFFF00",
-        Olive: "#808000",
-        Lime: "#00FF00",
-        Green: "#008000",
-        Aqua: "#00FFFF",
-        Teal: "#008080",
-        Blue: "#0000FF",
-        Navy: "#000080",
-        Fuschia: "#FF00FF",
-        Purple: "#800080",
-    },
+    tagColors,
     tagNameText: "Tag",
     editTagText: "Edit Tag",
     tagColorText: "Color",
@@ -167,9 +153,9 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
                 color: {
                     title: tagColorText,
                     type: "string",
-                    enum: keys,
+                    enum: values,
                     default: values[0],
-                    enumNames: values,
+                    enumNames: keys,
                 },
             },
         };
