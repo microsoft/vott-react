@@ -1,27 +1,45 @@
 import React from 'react';
+// import ITag from '../common/ITag'
 
 import { storiesOf } from '@storybook/react';
-import { TagsInput } from './tagsInput';
+import { TagsInput as tagsi } from './tagsInput';
 import { wInfo } from '../../../utils';
 import { text, boolean } from '@storybook/addon-knobs/react';
 
-storiesOf('Components/TagsInput', module).addWithJSX(
-  'basic TagsInput',
-  wInfo(`
+// storiesOf('Components/TagsInput', module).addWithJSX(
+//   'basic TagsInput',
+//   wInfo(`
 
-  ### Notes
+//   ### Notes
 
-  This is the tagsInput Component
+//   This is the tagsInput Component
 
-  ### Usage
-  ~~~js
-  <Button
-    label={'Enroll'}
-    disabled={false}
-    onClick={() => alert('hello there')}
-  />
-  ~~~`
-)(() => (
-    <TagsInput/>
-  ))
-);
+//   ### Usage
+//   ~~~js
+//   <Button
+//     label={'Enroll'}
+//     disabled={false}
+//     onClick={() => alert('hello there')}
+//   />
+//   ~~~`
+// )(() => (
+//     <TagsInput
+//     displayName='TagsInput Component'
+//     tags={[]}
+//     onChange={(tags) => alert()}
+//     />
+//   ))
+// );
+
+storiesOf('Components/TagsInput', module)
+  // .add('TagsInput', () => <Button onClick={action('clicked')}>Hello Button</Button>)
+  .add('TagsInput', () => (
+    <tagsi
+      displayName='TagsInput Component'
+      tags={[]}
+      onChange={(tags) => alert()}>
+      <span role="img" label="label">
+        Tags Input Component!
+      </span>
+    </tagsi>
+  ));
