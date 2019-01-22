@@ -10,7 +10,7 @@
   "dependencies": {
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-scripts-ts": "3.1.0",
+    "react-scripts-ts": "^3.1.0",
     "react-tag-input": "^6.1.0",
     "reactstrap": "^7.1.0",
     "sass-extract-loader": "^1.1.0"
@@ -18,12 +18,15 @@
   "scripts": {
     "start-js": "react-scripts-ts start",
     "start": "npm-run-all -p watch-sass-to-css start-js",
+    "compile": "tsc",
     "build-js": "react-scripts-ts build",
     "build": "npm-run-all -p build-sass-to-css build-js",
     "build-lib": "tsc && npm run build-sass-to-css && npm run copy-css-to-lib",
     "pretest": "./node_modules/.bin/tslint 'src/**/*.ts*'",
     "lintfix": "./node_modules/.bin/tslint 'src/**/*.ts*' --fix",
-    "test": "react-scripts-ts test --env=jsdom",
+    "test": "react-scripts-ts test --env=jsdom --silent",
+    "test:ci": "cross-env CI=true npm run test",
+    "test:coverage": "npm run test -- --coverage",
     "eject": "react-scripts-ts eject",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "copy-css-to-lib": "npm-run-all -s copy-base-css copy-component-css",
@@ -48,6 +51,7 @@
     "babel-core": "^6.26.3",
     "babel-plugin-styled-components": "^1.10.0",
     "cpx": "^1.5.0",
+    "cross-env": "^5.2.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
     "extract-text-webpack-plugin": "^3.0.2",
