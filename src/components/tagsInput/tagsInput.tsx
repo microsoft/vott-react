@@ -1,8 +1,8 @@
 import React from "react";
 import { WithContext as ReactTags } from "react-tag-input";
-import { KeyCodes, randomIntInRange } from "../../../../common/utils";
-import { ITag } from "../../../../models/applicationState";
-import { tagColors } from "../tagEditorModal/tagColors";
+import { KeyCodes, randomIntInRange } from "../../common/utils";
+import { ITag } from "../../models/models";
+import { tagColors } from "../common/tagColors";
 import "./tagsInput.scss";
 
 export const defaultValues = {
@@ -35,7 +35,7 @@ export interface IReactTag {
  * @member delimiters - Key code delimiters for creating a new tag
  * Defaults are enter (13) and comma (188)
  */
-export interface ITagsInputProps extends React.Props<TagsInput<ITagsInputProps>>{
+export interface ITagsInputProps extends React.Props<TagsInput<ITagsInputProps>> {
     tags: ITag[];
     onChange: (tags: ITag[]) => void;
 
@@ -110,6 +110,38 @@ export default class TagsInput<T extends ITagsInputProps> extends React.Componen
                 tags: this.toReactTags(this.props.tags),
             });
         }
+    }
+
+    /**
+     * Update an existing tag, called after clicking "OK" in modal
+     * @param newTag Edited version of tag
+     */
+    public updateTag(oldTag: ITag, newTag: ITag): void {
+        const newReactTag = this.toReactTag(newTag);
+        /**
+         * If this was a name change (ids are not equal), don"t allow
+         * the new tag to be named with a name that currently exists
+         * in other tags. Probably should include an error message.
+         * For now, just doesn"t allow the action to take place. Modal
+         * won"t close and user won"t be able to set the name. This is
+         * similar to how the component handles duplicate naming at the
+         * creation level. If user enters name that already exists in
+         * tags, the component just doesn"t do anything.
+         */
+        if (newReactTag.id !== oldTag.name && this.state.tags.some((t) => t.id === newReactTag.id)) {
+            return;
+        }
+        this.addHtml(newReactTag);
+        this.setState((prevState) => {
+            return {
+                tags: prevState.tags.map((reactTag) => {
+                    if (reactTag.id === oldTag.name) {
+                        reactTag = newReactTag;
+                    }
+                    return reactTag;
+                }),
+            };
+        }, () => this.props.onChange(this.toITags(this.state.tags)));
     }
 
     // UI Handlers
@@ -233,38 +265,6 @@ export default class TagsInput<T extends ITagsInputProps> extends React.Componen
             return {
                 tags: [...this.state.tags, reactTag],
                 currentTagColorIndex: (prevState.currentTagColorIndex + 1) % this.tagColorKeys.length,
-            };
-        }, () => this.props.onChange(this.toITags(this.state.tags)));
-    }
-
-    /**
-     * Update an existing tag, called after clicking "OK" in modal
-     * @param newTag Edited version of tag
-     */
-    public updateTag(oldTag: ITag, newTag: ITag): void {
-        const newReactTag = this.toReactTag(newTag);
-        /**
-         * If this was a name change (ids are not equal), don"t allow
-         * the new tag to be named with a name that currently exists
-         * in other tags. Probably should include an error message.
-         * For now, just doesn"t allow the action to take place. Modal
-         * won"t close and user won"t be able to set the name. This is
-         * similar to how the component handles duplicate naming at the
-         * creation level. If user enters name that already exists in
-         * tags, the component just doesn"t do anything.
-         */
-        if (newReactTag.id !== oldTag.name && this.state.tags.some((t) => t.id === newReactTag.id)) {
-            return;
-        }
-        this.addHtml(newReactTag);
-        this.setState((prevState) => {
-            return {
-                tags: prevState.tags.map((reactTag) => {
-                    if (reactTag.id === oldTag.name) {
-                        reactTag = newReactTag;
-                    }
-                    return reactTag;
-                }),
             };
         }, () => this.props.onChange(this.toITags(this.state.tags)));
     }

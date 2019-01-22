@@ -13,4 +13,4 @@ export const tagColors = {
     Navy: "#000080",
     Fuschia: "#FF00FF",
     Purple: "#800080",
-}
+};
