@@ -26,6 +26,7 @@
     "build-lib": "npm-run-all -p build-sass-to-css build-js",
     "build": "tsc && npm run build-sass-to-css && npm run copy-css-to-lib",
     "pretest": "./node_modules/.bin/tslint 'src/**/*.ts*'",
+    "postinstall": "npm run build",
     "lintfix": "./node_modules/.bin/tslint 'src/**/*.ts*' --fix",
     "test": "react-scripts-ts test --env=jsdom --silent",
     "test:ci": "cross-env CI=true npm run test",
