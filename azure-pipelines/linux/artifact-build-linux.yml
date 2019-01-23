@@ -5,7 +5,7 @@
 steps:
   - task: NodeTool@0
     displayName: 'Use Node 10.x'
-    input:
+    inputs:
       versionSpec: 10.x
 
   - bash: |  
