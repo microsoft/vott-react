@@ -15,9 +15,15 @@ const defaultValues = {
 
 /**
  * Properties for Tag Editor Modal
- * @member tag - Tag for editing
- * @member showModal - Modal is visible
  * @member onOk - Function to call when "Ok" button is clicked
+ * @member tagColors - Dictionary of colors indexed by color name, value is color code.
+ * Used to choose colors available to apply to tags
+ * @member tagNameText - Allows for substitution of English word "Tag"
+ * @member editTagText - Allows for substitution of English words "Edit Tag"
+ * @member tagColorText - Allows for substitution of English word "Color"
+ * @member saveText - Allows for substitution of English word "Save"
+ * @member cancelText - Allows for substitution of English word "Cancel"
+ * @member show - Modal is visible. Won't have tag unless `open` is called with tag
  * @member onCancel - Function to call when "Cancel" button is clicked or modal closed
  */
 export interface ITagEditorModalProps {
@@ -38,8 +44,10 @@ export interface ITagEditorModalProps {
 
 /**
  * State for Tag Editor Modal
- * @member tag - Current tag being edited
+ * @member originalTag - Tag originally opened with
+ * @member currentTag - Current tag as modified by modal
  * @member isOpen - Modal is open
+ * @member formSchema - JSON form schema for modal body form
  */
 export interface ITagEditorModalState {
     originalTag: ITag;
@@ -109,6 +117,10 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
         );
     }
 
+    /**
+     * Open editor modal with tag
+     * @param tag Tag to be edited
+     */
     public open(tag: ITag): void {
         this.setState({
             isOpen: true,
@@ -117,6 +129,9 @@ export default class TagEditorModal extends React.Component<ITagEditorModalProps
         });
     }
 
+    /**
+     * Close editor modal and call `onCancel` if provided
+     */
     public close(): void {
         this.setState({
             isOpen: false,

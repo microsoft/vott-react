@@ -34,6 +34,10 @@ export interface IReactTag {
  * Default is "Add new tag"
  * @member delimiters - Key code delimiters for creating a new tag
  * Defaults are enter (13) and comma (188)
+ * @member onTagClick - Function to call on clicking individual tag
+ * @member onCtrlTagClick - Function to call on clicking individual tag while holding CTRL key
+ * @member onShiftTagClick - Function to call on clicking individual tag while holding Shift key
+ * @member onCtrlShiftTagClick - Function to call on clicking individual tag while holding CTRL and Shift keys
  */
 export interface ITagsInputProps extends React.Props<TagsInput> {
     tags: ITag[];
@@ -114,7 +118,8 @@ export default class TagsInput extends React.Component<ITagsInputProps, ITagsInp
 
     /**
      * Update an existing tag, called after clicking "OK" in modal
-     * @param newTag Edited version of tag
+     * @param oldTag Tag being edited
+     * @param newTag Newly edited version of tag
      */
     public updateTag(oldTag: ITag, newTag: ITag): void {
         const newReactTag = this.toReactTag(newTag);
@@ -144,13 +149,23 @@ export default class TagsInput extends React.Component<ITagsInputProps, ITagsInp
         }, () => this.props.onChange(this.toITags(this.state.tags)));
     }
 
+    /**
+     * Get span element for each tag
+     * Protected so that inheriting components can override if necessary
+     * Defaults to just returning the name of the tag in the span
+     * @param name Name of tag to get
+     */
+    protected getTagSpan(name: string) {
+        return <span>{name}</span>;
+    }
+
     // UI Handlers
 
     /**
      * Calls the onTagClick handler if not null with clicked tag
      * @param event Click event
      */
-    protected handleTagClick(event) {
+    private handleTagClick(event) {
         const text = this.getTagIdFromClick(event);
         const tag: ITag = this.toItag(this.getTag(text));
         if (this.props.onCtrlShiftTagClick && event.ctrlKey && event.shiftKey) {
@@ -170,7 +185,7 @@ export default class TagsInput extends React.Component<ITagsInputProps, ITagsInp
      * Gets the tag with the given name (id)
      * @param id string name of tag. param "id" for lower level react component
      */
-    protected getTag(id: string): IReactTag {
+    private getTag(id: string): IReactTag {
         const match = this.state.tags.find((tag) => tag.id === id);
         if (!match) {
             throw new Error(`No tag by id: ${id}`);
@@ -182,7 +197,7 @@ export default class TagsInput extends React.Component<ITagsInputProps, ITagsInp
      * Gets tag ID (name) from a click event
      * @param event Click event
      */
-    protected getTagIdFromClick(event): string {
+    private getTagIdFromClick(event): string {
         if (event.target.lastChild) {
             return event.target.lastChild.data;
         }
@@ -194,7 +209,7 @@ export default class TagsInput extends React.Component<ITagsInputProps, ITagsInp
      * @param name name of tag
      * @param color color of tag
      */
-    protected ReactTagHtml(name: string, color: string) {
+    private ReactTagHtml(name: string, color: string) {
         return (
             <div className="tag inline-block" onClick={(event) => this.handleTagClick(event)}>
                 <div className="tag-contents">
@@ -203,27 +218,6 @@ export default class TagsInput extends React.Component<ITagsInputProps, ITagsInp
                 </div>
             </div>
         );
-    }
-
-    /**
-     * Get span element for each tag
-     */
-    protected getTagSpan(name: string) {
-        return <span>{name}</span>;
-    }
-
-    /**
-     * Converts IReactTag to ITag
-     * @param tag IReactTag to convert to ITag
-     */
-    protected toItag(tag: IReactTag): ITag {
-        if (!tag) {
-            return null;
-        }
-        return {
-            name: tag.id,
-            color: tag.color,
-        };
     }
 
     /**
@@ -306,6 +300,10 @@ export default class TagsInput extends React.Component<ITagsInputProps, ITagsInp
         };
     }
 
+    /**
+     * Update HTML on tags
+     * @param tags List of IReactTags to update HTML
+     */
     private updateTagsHtml(tags: IReactTag[]): IReactTag[] {
         const newTags = [];
         for (const tag of tags) {
@@ -337,5 +335,19 @@ export default class TagsInput extends React.Component<ITagsInputProps, ITagsInp
      */
     private toITags(tags: IReactTag[]): ITag[] {
         return tags.map((element: IReactTag) => this.toItag(element));
+    }
+
+    /**
+     * Converts IReactTag to ITag
+     * @param tag IReactTag to convert to ITag
+     */
+    private toItag(tag: IReactTag): ITag {
+        if (!tag) {
+            return null;
+        }
+        return {
+            name: tag.id,
+            color: tag.color,
+        };
     }
 }
