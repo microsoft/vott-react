@@ -1,37 +1,21 @@
 # Validate changes
-
 # cat .codecov.yml | curl --data-binary @- https://codecov.io/validate
 
-
-
 comment:  on # enable pull request comment
-
 coverage:
-
-  range: 70..100
-
+  range: 60..100
   round: down # round down to the precision point
-
   precision: 2
-
   status:
-
     project: # compare project coverage against the base of pr
-
       default:
-
-        target: 75%  # min coverage ratio to be considered a success
-
+<<<<<<< HEAD
+        target: 60%  # min coverage ratio to be considered a success
+=======
+        target: 65%  # min coverage ratio to be considered a success
+>>>>>>> 9835ea622e064c3acbc9cf354e8575a7dd8e924f
         threshold: null  # allow coverage to drop by X%
-
         base: auto
-
     patch:  # provides an indication on how well the pull request is tested
-
       default:
-
-        target: 70% # min coverage ratio to be considered a success
-
-  # ignore:
-
-    # - "src/electron/start.js"
+        target: 60% # min coverage ratio to be considered a success
