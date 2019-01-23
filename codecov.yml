@@ -9,7 +9,11 @@ coverage:
   status:
     project: # compare project coverage against the base of pr
       default:
+<<<<<<< HEAD
         target: 60%  # min coverage ratio to be considered a success
+=======
+        target: 65%  # min coverage ratio to be considered a success
+>>>>>>> 9835ea622e064c3acbc9cf354e8575a7dd8e924f
         threshold: null  # allow coverage to drop by X%
         base: auto
     patch:  # provides an indication on how well the pull request is tested
