@@ -1,7 +1,6 @@
 {
   "name": "vott-react",
   "version": "0.1.0",
-  "private": true,
   "main": "build/lib/components/index.js",
   "types": "build/lib/components/index.d.ts",
   "engines": {
