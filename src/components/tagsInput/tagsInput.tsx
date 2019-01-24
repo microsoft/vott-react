@@ -3,7 +3,6 @@ import { WithContext as ReactTags } from "react-tag-input";
 import { KeyCodes, randomIntInRange } from "../../common/utils";
 import { ITag } from "../../models/models";
 import { tagColors } from "../common/tagColors";
-import "./tagsInput.css";
 
 export const defaultValues = {
     tagColors,
