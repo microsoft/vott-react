@@ -17,4 +17,6 @@ steps:
     npm run compile
 
     npm run test:ci # don't watch and just run all the tests
+    # npm run build-lib
+    # npm publish
   displayName: 'Run tests'
