@@ -23,12 +23,8 @@
     "react-tag-input": "^6.1.0",
     "reactstrap": "^7.1.0",
     "semver": "^5.6.0",
-<<<<<<< HEAD
     "ts-loader": "^5.3.3",
     "typescript-require": "^0.2.10"
-=======
-    "ts-loader": "^5.3.3"
->>>>>>> tested, built, and packed for npm
   },
   "scripts": {
     "start-js": "react-scripts-ts start",
