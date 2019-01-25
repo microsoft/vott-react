@@ -9,7 +9,6 @@ export const defaultValues = {
     delimiters: [KeyCodes.comma, KeyCodes.enter],
     placeHolder: "Add new tag",
 };
-
 /**
  * Interface for model required to work with lower level
  * tags input component. Rather than name, uses "id".
@@ -87,7 +86,6 @@ export default class TagsInput extends React.Component<ITagsInputProps, ITagsInp
         this.handleAddition = this.handleAddition.bind(this);
         this.updateTag = this.updateTag.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
-        this.shouldUpdate = this.shouldUpdate.bind(this);
         // Helpers
         this.toReactTag = this.toReactTag.bind(this);
         this.getTag = this.getTag.bind(this);
@@ -109,20 +107,8 @@ export default class TagsInput extends React.Component<ITagsInputProps, ITagsInp
         );
     }
 
-    private shouldUpdate(prevProps) {
-        return (
-            prevProps.tags !== this.props.tags && 
-            (
-                // Don't update with empty tags (first time)
-                this.props.tags.length > 0 ||
-                // But if all tags have been deleted (prevProps had tags), still update
-                prevProps.tags.length > 0
-            )
-        );
-    }
-
     public componentDidUpdate(prevProps: ITagsInputProps) {
-        if (this.shouldUpdate(prevProps)) {
+        if (prevProps.tags !== this.props.tags) {
             this.setState({
                 tags: this.toReactTags(this.props.tags),
             });
@@ -268,13 +254,14 @@ export default class TagsInput extends React.Component<ITagsInputProps, ITagsInp
     private handleAddition(reactTag: IReactTag): void {
         reactTag.color = this.tagColors[this.tagColorKeys[this.state.currentTagColorIndex]];
         this.addHtml(reactTag);
-        const newTags = [...this.state.tags, reactTag]
         this.setState((prevState) => {
             return {
-                tags: newTags,
+                tags: [...this.state.tags, reactTag],
                 currentTagColorIndex: (prevState.currentTagColorIndex + 1) % this.tagColorKeys.length,
             };
-        }, () => this.props.onChange(this.toITags(newTags)));
+        }, () => {
+            this.props.onChange(this.toITags(this.state.tags))
+        });
     }
 
     /**
