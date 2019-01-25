@@ -1,8 +1,8 @@
 {
   "name": "vott-react",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "VOTT Team vott@microsoft.com>",
-  "description": "Reusable React components originally designed for VOTT",
+  "description": "Reusable React components originally designed for VOTT app",
   "license": "MIT",
   "main": "build/lib/components/index.js",
   "types": "build/lib/components/index.d.ts",
