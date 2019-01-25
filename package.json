@@ -1,10 +1,17 @@
 {
   "name": "vott-react",
   "version": "0.1.0",
+  "author": "VOTT Team vott@microsoft.com>",
+  "description": "Reusable React components originally designed for VOTT",
+  "license" : "MIT",
   "main": "build/lib/components/index.js",
   "types": "build/lib/components/index.d.ts",
   "engines": {
     "node": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/Microsoft/vott-react"
   },
   "dependencies": {
     "@storybook/addon-actions": "^4.1.11",
