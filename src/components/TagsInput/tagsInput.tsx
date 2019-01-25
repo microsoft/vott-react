@@ -101,6 +101,7 @@ export default class TagsInput extends React.Component<ITagsInputProps, ITagsInp
                     placeholder={this.props.placeHolder || defaultValues.placeHolder}
                     autofocus={false}
                     handleDelete={this.handleDelete}
+                    allowDeleteFromEmptyInput={false}
                     handleAddition={this.handleAddition}
                     handleDrag={this.handleDrag}
                     delimiters={this.props.delimiters || defaultValues.delimiters} />
@@ -282,10 +283,7 @@ export default class TagsInput extends React.Component<ITagsInputProps, ITagsInp
      * @param i index of tag being deleted
      * @param event delete event
      */
-    private handleDelete(i: number, event): void {
-        if (event.keyCode === KeyCodes.backspace) {
-            return;
-        }
+    private handleDelete(i: number): void {
         const tags = this.state.tags.filter((tag, index) => index !== i);
 
         // Updating HTML is dependent upon state having most up to date
