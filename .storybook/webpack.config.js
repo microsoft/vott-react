@@ -3,7 +3,6 @@ const path = require('path');
 module.exports = (baseConfig, env, config) => {
   config.module.rules.push({
     test: /\.(ts|tsx)$/,
-    // loader = ['babel-loader', 'ts-loader'],
     use: [{
       loader: require.resolve('awesome-typescript-loader')
     }, {
@@ -38,5 +37,12 @@ module.exports = (baseConfig, env, config) => {
     });
 
   config.resolve.extensions.push('.ts', '.tsx');
+
+  baseConfig.ts = {
+    compilerOptions: {
+      jsx: 'react'
+    },
+    configFileName: path.resolve(__dirname, '../tsconfig.json')
+  }
   return config;
 };
