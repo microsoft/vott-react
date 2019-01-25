@@ -1,7 +1,7 @@
 trigger:
-  - master # disable CI build for branch except master
+  - tbarlow12/npm # disable CI build for branch except tbarlow12/npm
 pr:
-  - master # only kick off for pr targeting master
+  - tbarlow12/npm # only kick off for pr targeting tbarlow12/npm
 
 jobs:
 - job: Linux
