@@ -3,34 +3,35 @@
 This repository contains custom React Components designed for the Microsoft Open Source VOTT app (https://github.com/Microsoft/VoTT). The components are written in React with Typescript. While the VOTT app uses Redux to manage state, these components do not require it.
 
 The main components are:
-    * Drag-and-drop tag manager tool
-    * Scrolling thumbnail viewer
+- Drag-and-drop tag manager tool
+- Scrolling thumbnail viewer
 
 Supporting components, grouped in main component folder, include:
-    * Asset Preview for loading photo or video
-    * Tags Input for adding tags to tag manager
-    * Editor toolbar for choosing selection style
+- Asset Preview for loading photo or video
+- Tags Input for adding tags to tag manager
+- Editor toolbar for choosing selection style
 
-Components may be viewed in a browser using Storybook by cloning the repo and running:
-    `npm run storybook`
+Components may be viewed in a browser using Storybook by cloning the repo and running `npm run storybook`
 
 # Contributing Guidelines
 
 We welcome issues and pull requests into the project. We ask that you follow these simple guidelines:
 
 **Issues**
-    * Look for duplicate issues & comment on thread if experiencing something similar
-    * Fill in template information (platform, OS, version, screenshots, etc.)
+- Look for duplicate issues & comment on thread if experiencing something similar
+- Fill in template information (platform, OS, version, screenshots, etc.)
+  
 **Pull Requests**
-    1. Find an issue to work on, or create a new one
-    2. Fork repo, make sure you have latest changes from v2
-    3. Create branch following naming convention: git checkout -b issue-<###>-<short-description>.
-    4. Write code
-    5. Add unit tests
-    6. Verify linting and unit tests by running npm test
-    7. Update docs if needed
-    8. Rebase on master and resolve conflicts
-    9. Submit PR to master branch
+1. Find an issue to work on, or create a new one
+2.  Fork repo, make sure you have latest changes from v2
+3. Create branch following naming convention: 
+    `git checkout -b issue-<###>-<short-description>`
+4. Write code
+5. Add unit tests
+6. Verify linting and unit tests by running npm test
+7. Update docs if needed
+8. Rebase on master and resolve conflicts
+9.  Submit PR to master branch
 
 Try to keep PRs small to decrease the time required to review and merge
 
