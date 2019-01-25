@@ -1,1 +1,3 @@
-export { ITag } from "./models";
+import { ITag } from "./models";
+
+export { ITag };

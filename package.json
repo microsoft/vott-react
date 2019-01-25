@@ -1,9 +1,9 @@
 {
   "name": "vott-react",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "VOTT Team vott@microsoft.com>",
   "description": "Reusable React components originally designed for VOTT",
-  "license" : "MIT",
+  "license": "MIT",
   "main": "build/lib/components/index.js",
   "types": "build/lib/components/index.d.ts",
   "engines": {
@@ -93,5 +93,11 @@
   "resolutions": {
     "@types/react": "^16.7.20",
     "babel-core": "7.0.0-bridge.0"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
