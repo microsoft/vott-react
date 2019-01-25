@@ -1,1 +1,1 @@
-export {default as TagEditorModal, ITagEditorModalProps, ITagEditorModalState} from "./tagEditorModal"
+export {default} from "./tagEditorModal"
