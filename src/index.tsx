@@ -1,1 +1,1 @@
-export * from "./components";
+export {HelloWorld, TagsInput, ITagsInputProps, TagEditorModal, ITagEditorModalProps} from "./components"
