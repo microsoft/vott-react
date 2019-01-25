@@ -1,9 +1,8 @@
 import * as React from "react";
 import { WithContext as ReactTags } from "react-tag-input";
-import { KeyCodes, randomIntInRange } from "../common/utils";
+import { KeyCodes, randomIntInRange } from "../../common/utils";
 import { ITag } from "../../models/models";
-import { tagColors } from "../common/tagColors";
-import './tagsInput.css';
+import { tagColors } from "../../common/tagColors";
 
 export const defaultValues = {
     tagColors,
@@ -88,6 +87,7 @@ export default class TagsInput extends React.Component<ITagsInputProps, ITagsInp
         this.handleAddition = this.handleAddition.bind(this);
         this.updateTag = this.updateTag.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.shouldUpdate = this.shouldUpdate.bind(this);
         // Helpers
         this.toReactTag = this.toReactTag.bind(this);
         this.getTag = this.getTag.bind(this);
@@ -108,8 +108,20 @@ export default class TagsInput extends React.Component<ITagsInputProps, ITagsInp
         );
     }
 
+    private shouldUpdate(prevProps) {
+        return (
+            prevProps.tags !== this.props.tags && 
+            (
+                // Don't update with empty tags (first time)
+                this.props.tags.length > 0 ||
+                // But if all tags have been deleted (prevProps had tags), still update
+                prevProps.tags.length > 0
+            )
+        );
+    }
+
     public componentDidUpdate(prevProps: ITagsInputProps) {
-        if (prevProps.tags !== this.props.tags) {
+        if (this.shouldUpdate(prevProps)) {
             this.setState({
                 tags: this.toReactTags(this.props.tags),
             });
@@ -269,10 +281,10 @@ export default class TagsInput extends React.Component<ITagsInputProps, ITagsInp
      * @param i index of tag being deleted
      * @param event delete event
      */
-    private handleDelete(i: number): void {
-        // if (event.keyCode === KeyCodes.backspace) {
-        //     return;
-        // }
+    private handleDelete(i: number, event): void {
+        if (event.keyCode === KeyCodes.backspace) {
+            return;
+        }
         const tags = this.state.tags.filter((tag, index) => index !== i);
 
         // Updating HTML is dependent upon state having most up to date

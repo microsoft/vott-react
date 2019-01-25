@@ -2,7 +2,7 @@ import * as React from "react";
 import Form from "react-jsonschema-form";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { ITag } from "../../models/models";
-import { tagColors } from "../common/tagColors";
+import { tagColors } from "../../common/tagColors";
 
 const defaultValues = {
     tagColors,

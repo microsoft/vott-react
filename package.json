@@ -1,6 +1,6 @@
 {
   "name": "vott-react",
-  "version": "0.1.10",
+  "version": "0.1.13",
   "private": false,
   "author": {
     "name": "vott-team"
@@ -23,7 +23,8 @@
     "react-dom": "^16.1.0",
     "react-jsonschema-form": "^1.2.0",
     "react-tag-input": "^6.2.0",
-    "reactstrap": "^7.1.0"
+    "reactstrap": "^7.1.0",
+    "typescript": "^3.2.4"
   },
   "scripts": {
     "start-js": "react-scripts-ts start",
