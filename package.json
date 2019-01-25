@@ -1,6 +1,7 @@
 {
   "name": "vott-react",
 <<<<<<< HEAD
+<<<<<<< HEAD
   "version": "0.1.16",
   "author": "VOTT Team vott@microsoft.com>",
   "description": "Reusable React components originally designed for VOTT app",
@@ -11,6 +12,12 @@
   "description": "Reusable React components originally designed for VOTT",
   "license" : "MIT",
 >>>>>>> added information that might be needed by npm to package.json
+=======
+  "version": "0.1.1",
+  "author": "VOTT Team vott@microsoft.com>",
+  "description": "Reusable React components originally designed for VOTT",
+  "license": "MIT",
+>>>>>>> rebuilt without index.ts files in each folder
   "main": "build/lib/components/index.js",
   "types": "build/lib/components/index.d.ts",
   "engines": {
