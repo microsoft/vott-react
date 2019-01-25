@@ -267,12 +267,13 @@ export default class TagsInput extends React.Component<ITagsInputProps, ITagsInp
     private handleAddition(reactTag: IReactTag): void {
         reactTag.color = this.tagColors[this.tagColorKeys[this.state.currentTagColorIndex]];
         this.addHtml(reactTag);
+        const newTags = [...this.state.tags, reactTag]
         this.setState((prevState) => {
             return {
-                tags: [...this.state.tags, reactTag],
+                tags: newTags,
                 currentTagColorIndex: (prevState.currentTagColorIndex + 1) % this.tagColorKeys.length,
             };
-        }, () => this.props.onChange(this.toITags(this.state.tags)));
+        }, () => this.props.onChange(this.toITags(newTags)));
     }
 
     /**
