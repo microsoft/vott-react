@@ -1,1 +1,1 @@
-export {default} from "./tagsInput"
+export {default, ITagsInputProps, ITagsInputState} from "./tagsInput"

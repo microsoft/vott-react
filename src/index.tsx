@@ -1,1 +1,6 @@
-export {HelloWorld, TagsInput, TagEditorModal} from "./components"
+export {
+    TagsInput,
+    ITagsInputProps,
+    TagEditorModal,
+    ITagEditorModalProps
+} from "./components"

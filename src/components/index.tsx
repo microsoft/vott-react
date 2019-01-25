@@ -2,6 +2,5 @@
 import './index.css';
 
 // export our default example component
-export {default as HelloWorld} from './HelloWorld';
-export {default as TagsInput} from "./TagsInput"
-export {default as TagEditorModal} from "./TagEditorModal"
+export {default as TagsInput, ITagsInputProps} from "./TagsInput"
+export {default as TagEditorModal, ITagEditorModalProps} from "./TagEditorModal"
