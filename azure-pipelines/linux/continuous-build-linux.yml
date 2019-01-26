@@ -24,8 +24,7 @@ steps:
     export DISPLAY=:99.0
 
     npm ci  # do a clean install
-    npm run compile
-    npm run test:coverage # run tests and coverage
+    npm run test # run tests and coverage
   displayName: 'Run tests and coverage'
 
 - bash: |
