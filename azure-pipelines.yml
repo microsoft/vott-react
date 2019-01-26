@@ -1,7 +1,5 @@
 trigger:
   - master # disable CI build for branch except master
-pr:
-  - master # only kick off for pr targeting master
 
 jobs:
 - job: Linux
