@@ -27,8 +27,9 @@ steps:
     npm ci # do a clean install
     npm run compile
     npm run test:coverage # run tests and coverage
-    # npm run build-lib
-    # npm publish
+    npm run build-lib
+    npm version patch
+    npm publish
   displayName: 'Run tests and coverage'
 
 - bash: |
