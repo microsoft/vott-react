@@ -11,6 +11,7 @@
     "@storybook/addon-links": "^4.1.11",
     "babel-core": "^7.0.0-bridge.0",
     "babel-preset-react-app": "^7.0.0",
+    "prop-types": "^15.6.2",
     "react-scripts-ts": "^3.1.0",
     "react-tag-input": "^6.1.0",
     "reactstrap": "^7.1.0",

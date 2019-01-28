@@ -4,24 +4,8 @@ module.exports = (baseConfig, env, config) => {
   config.module.rules.push({
     test: /\.(ts|tsx)$/,
     use: [{
-    //   loader: require.resolve('awesome-typescript-loader')
-    // }, {
-    //   loader: require.resolve('react-docgen-typescript-loader')
-    // }, {
-    //   loader: require.resolve('ts-loader')
-    // }, {
       loader: require.resolve('babel-loader'),
-    // }, {
-    //   loader: require.resolve('html-loader')
-    // }],
-      // options: {
-      //   presets: [['react-app', { flow: false, typescript: true }]],
-      // },
       loader: require.resolve('ts-loader'),
-      // loader: require.resolve("css-loader"),
-      // options: {
-      //   modules: true,
-      // }
     }],
   });
 

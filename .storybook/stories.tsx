@@ -1,5 +1,3 @@
-// import React from 'react';
-
 import * as React from 'react'; 
 
 import { storiesOf } from '@storybook/react';
@@ -27,7 +25,7 @@ storiesOf('VoTT React', module).add(
     ### To use this Storybook
 
     Explore the panels on the left.
-  `)(() => <div>This is (not really) the TagsInput Component!</div>)
+  `)(() => <div>This is a test component!</div>)
 );
 
 storiesOf('VoTT React', module).add(
