@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 import { KeyCodes, randomIntInRange } from "../../common/utils";
 import { ITag } from "../../models/models";
