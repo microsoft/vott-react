@@ -27,7 +27,6 @@ steps:
     npm ci # do a clean install
     npm run compile
     npm run test:coverage # run tests and coverage
-
   displayName: 'Run tests and coverage'
 
 - bash: |

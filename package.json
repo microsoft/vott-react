@@ -1,6 +1,10 @@
 {
   "name": "vott-react",
+<<<<<<< HEAD
   "version": "0.1.16",
+=======
+  "version": "0.1.15",
+>>>>>>> refactored to remove index files, added publish commands to pipeline
   "author": "VOTT Team vott@microsoft.com>",
   "description": "Reusable React components originally designed for VOTT app",
   "license": "MIT",
