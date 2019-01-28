@@ -20,13 +20,15 @@ steps:
 
       npm run build-lib
 
-      npm-cli-login
-      npm version patch
-      npm publish
-    displayName: Build and publish
+      # echo '//registry.npmjs.org/:_authToken=$(NPM_TOKEN)'
+      # npm version patch
+      # npm publish
+
+    displayName: Build
 
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Artifact: linux'
     inputs:
       PathtoPublish: linux
       ArtifactName: linux
+
