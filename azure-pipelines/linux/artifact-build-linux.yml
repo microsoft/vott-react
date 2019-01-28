@@ -20,9 +20,9 @@ steps:
 
       npm run build-lib
 
-      # npm login
-      # npm version patch
-      # npm publish
+      npm-cli-login
+      npm version patch
+      npm publish
     displayName: Build and publish
 
   - task: PublishBuildArtifacts@1
