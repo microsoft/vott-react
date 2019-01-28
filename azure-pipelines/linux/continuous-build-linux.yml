@@ -37,5 +37,5 @@ steps:
 - bash: |
     npm run build-lib
     echo '//registry.npmjs.org/:_authToken=$(NPM_TOKEN)'
-    npm version patch
+    # npm version patch
     npm publish
