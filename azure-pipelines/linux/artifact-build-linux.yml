@@ -17,7 +17,13 @@ steps:
 
       mkdir -p linux
       cp build/* linux/
-    displayName: Build
+
+      npm run build-lib
+
+      # npm login
+      # npm version patch
+      # npm publish
+    displayName: Build and publish
 
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Artifact: linux'
