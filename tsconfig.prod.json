@@ -9,7 +9,7 @@
         "allowSyntheticDefaultImports": true,
         "strict": false,
         "forceConsistentCasingInFileNames": true,
-        "module": "esnext",
+        "module": "commonjs",
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "isolatedModules": false,
@@ -21,7 +21,9 @@
             "es6",
             "dom",
             "dom.iterable"
-        ]
+        ],
+        "rootDirs": ["src", ".storybook"],
+        "baseUrl": "src",
     },
     "include": [
         "src"
