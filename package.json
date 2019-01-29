@@ -6,21 +6,29 @@
     "types": "dist/lib/index.d.ts",
     "dependencies": {
         "react": "^16.7.0",
-        "react-dom": "^16.7.0"
+        "react-dom": "^16.7.0",
+        "react-jsonschema-form": "^1.2.0",
+        "react-tag-input": "^6.2.1",
+        "reactstrap": "^7.1.0"
     },
+    "files": [
+        "dist/lib",
+        "dist/css"
+    ],
     "scripts": {
         "start": "react-scripts start",
+        "lint": "tslint 'src/**/*.ts*'",
         "pretest": "npm run lint",
         "test": "react-scripts test --env=jsdom --silent",
         "test:ci": "set CI=true && npm run test",
         "test:coverage": "react-scripts test --coverage",
         "eject": "react-scripts eject",
-        "build": "npm run clean && npm run build:js && npm run build:css",
         "clean": "rm -rf dist",
-        "prebuild:js": "npm run lint",
+        "prebuild:js": "npm run test:ci",
+        "build": "npm run clean && npm run build:js && npm run build:css",
         "build:js": "tsc -p tsconfig.prod.json",
         "build:css": "node-sass src/ -r -o dist/css",
-        "lint": "tslint 'src/**/*.ts*'"
+        "storybook": "start-storybook -p 9001 -c .storybook"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -32,11 +40,18 @@
         "not op_mini all"
     ],
     "devDependencies": {
+        "@storybook/addon-actions": "^4.1.11",
+        "@storybook/addon-info": "^4.1.11",
+        "@storybook/addon-links": "^4.1.11",
+        "@storybook/react": "^4.1.11",
         "@types/enzyme": "^3.1.15",
         "@types/jest": "^23.3.13",
         "@types/node": "10.12.18",
         "@types/react": "16.7.22",
         "@types/react-dom": "16.0.11",
+        "@types/react-jsonschema-form": "^1.0.13",
+        "@types/reactstrap": "^7.1.1",
+        "@types/storybook__react": "^4.0.0",
         "enzyme": "^3.8.0",
         "enzyme-adapter-react-16": "^1.8.0",
         "jest-enzyme": "^7.0.1",
