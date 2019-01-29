@@ -21,9 +21,7 @@
             "es6",
             "dom",
             "dom.iterable"
-        ],
-        "rootDirs": ["src", ".storybook"],
-        "baseUrl": "src",
+        ]
     },
     "include": [
         "src"
