@@ -16,7 +16,7 @@ steps:
       npm run build
 
       mkdir -p linux
-      cp build/* linux/
+      cp -r build/* linux/
 
       npm run build-lib
 
