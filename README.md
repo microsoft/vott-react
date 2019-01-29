@@ -2,6 +2,8 @@
 
 [![Code Coverage](https://codecov.io/gh/Microsoft/vott-react/branch/master/graph/badge.svg)](https://codecov.io/gh/Microsoft/vott-react)
 
+[![npm version](https://badge.fury.io/js/vott-react.svg)](https://badge.fury.io/js/vott-react)
+
 # vott-react
 
 This repository contains custom React Components designed for the Microsoft Open Source VOTT app (https://github.com/Microsoft/VoTT). The components are written in React with Typescript. While the VOTT app uses Redux to manage state, these components do not require it.
