@@ -16,7 +16,10 @@ steps:
       npm run build
 
       mkdir -p linux
-      cp build/* linux/
+      cp -r build/* linux/
+
+      npm run build
+
     displayName: Build
 
   - task: PublishBuildArtifacts@1
@@ -24,3 +27,13 @@ steps:
     inputs:
       PathtoPublish: linux
       ArtifactName: linux
+
+  - bash: |
+      npm run build-lib
+      npm install -g npm-cli-login
+      npm-cli-login -u $(NPM_USER) -p $(NPM_PASS) -e $(NPM_EMAIL)
+      npm version patch
+      npm publish
+
+    displayName: Publish
+
