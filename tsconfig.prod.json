@@ -25,5 +25,9 @@
     },
     "include": [
         "src"
+    ],
+    "exclude": [
+        "src/app.tsx",
+        "src/**/*.test.ts*"
     ]
 }

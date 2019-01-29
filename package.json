@@ -2,18 +2,25 @@
     "name": "vott-react-2",
     "version": "0.1.0",
     "private": true,
+    "main": "dist/lib/index.js",
+    "types": "dist/lib/index.d.ts",
     "dependencies": {
         "react": "^16.7.0",
         "react-dom": "^16.7.0"
     },
     "scripts": {
         "start": "react-scripts start",
-        "test": "react-scripts test",
+        "pretest": "npm run lint",
+        "test": "react-scripts test --env=jsdom --silent",
+        "test:ci": "set CI=true && npm run test",
+        "test:coverage": "react-scripts test --coverage",
         "eject": "react-scripts eject",
-        "build": "npm run clean && npm run build:js",
+        "build": "npm run clean && npm run build:js && npm run build:css",
         "clean": "rm -rf dist",
-        "prebuild:js": "tslint 'src/**/*.ts*'",
-        "build:js": "tsc -p tsconfig.prod.json"
+        "prebuild:js": "npm run lint",
+        "build:js": "tsc -p tsconfig.prod.json",
+        "build:css": "node-sass src/ -r -o dist/css",
+        "lint": "tslint 'src/**/*.ts*'"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -32,6 +39,8 @@
         "@types/react-dom": "16.0.11",
         "enzyme": "^3.8.0",
         "enzyme-adapter-react-16": "^1.8.0",
+        "jest-enzyme": "^7.0.1",
+        "node-sass": "^4.11.0",
         "react-scripts": "2.1.3",
         "tslint": "^5.12.1",
         "typescript": "3.2.4"
