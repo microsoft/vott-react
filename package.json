@@ -24,7 +24,6 @@
         "test:coverage": "react-scripts test --coverage",
         "eject": "react-scripts eject",
         "clean": "rm -rf dist",
-        "install": "npm run build",
         "prebuild": "npm run lint",
         "build": "npm run clean && npm run build:js && npm run build:css",
         "build:js": "tsc -p tsconfig.prod.json",

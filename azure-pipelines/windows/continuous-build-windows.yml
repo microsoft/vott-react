@@ -8,15 +8,15 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- bash: | 
+- bash: |
     set -e
-    
+
     export DISPLAY=:99.0
 
     npm ci  # do a clean install
     npm run compile
 
     npm run test:ci # don't watch and just run all the tests
-    # npm run build-lib
+    # npm run build
     # npm publish
   displayName: 'Run tests'
