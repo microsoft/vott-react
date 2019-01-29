@@ -1,7 +1,7 @@
 import { mount } from "enzyme";
 import React from "react";
 import MockFactory from "../../common/mockFactory";
-import TagEditorModal, { ITagEditorModalProps, ITagEditorModalState } from "./tagEditorModal";
+import { TagEditorModal, ITagEditorModalProps, ITagEditorModalState } from "./tagEditorModal";
 
 describe("Tag Editor Modal", () => {
 

@@ -1,5 +1,5 @@
 {
-    "name": "vott-react-2",
+    "name": "vott-react",
     "version": "0.1.0",
     "private": true,
     "main": "dist/lib/index.js",
@@ -9,7 +9,7 @@
         "react-dom": "^16.7.0",
         "react-jsonschema-form": "^1.2.0",
         "react-tag-input": "^6.1.0",
-        "reactstrap": "^7.1.0"
+        "reactstrap": "^6.5.0"
     },
     "files": [
         "dist/lib",
@@ -24,7 +24,8 @@
         "test:coverage": "react-scripts test --coverage",
         "eject": "react-scripts eject",
         "clean": "rm -rf dist",
-        "prebuild:js": "npm run test:ci",
+        "install": "npm run build",
+        "prebuild": "npm run lint",
         "build": "npm run clean && npm run build:js && npm run build:css",
         "build:js": "tsc -p tsconfig.prod.json",
         "build:css": "node-sass src/ -r -o dist/css",
@@ -43,10 +44,10 @@
         "@types/enzyme": "^3.1.15",
         "@types/jest": "^23.3.13",
         "@types/node": "10.12.18",
-        "@types/react": "16.7.22",
-        "@types/react-dom": "16.0.11",
+        "@types/react": "^16.7.6",
+        "@types/react-dom": "^16.0.9",
         "@types/react-jsonschema-form": "^1.0.13",
-        "@types/reactstrap": "^7.1.1",
+        "@types/reactstrap": "^6.4.3",
         "enzyme": "^3.8.0",
         "enzyme-adapter-react-16": "^1.8.0",
         "jest-enzyme": "^7.0.1",

@@ -64,7 +64,7 @@ export interface ITagsInputState {
 /**
  * Component for creating, modifying and using tags
  */
-export default class TagsInput extends React.Component<ITagsInputProps, ITagsInputState> {
+export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState> {
 
     private tagColors: {[id: string]: string};
     private tagColorKeys: string[];

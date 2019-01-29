@@ -2,7 +2,7 @@ import { mount } from "enzyme";
 import React from "react";
 import MockFactory from "../../common/mockFactory";
 import { KeyCodes } from "../../common/utils";
-import TagsInput, { ITagsInputProps } from "./tagsInput";
+import { TagsInput, ITagsInputProps } from "./tagsInput";
 // tslint:disable-next-line:no-var-requires
 import { tagColors } from "../common/tagColors";
 
@@ -12,7 +12,7 @@ describe("Tags Input Component", () => {
 
     function createComponent(props: ITagsInputProps) {
         return mount(
-            <TagsInput {...props}/>,
+            <TagsInput {...props} />,
         );
     }
 
@@ -56,8 +56,8 @@ describe("Tags Input Component", () => {
             onChange: onChangeHandler,
         });
         const newTagName = "My new tag";
-        wrapper.find("input").simulate("change", {target: {value: newTagName}});
-        wrapper.find("input").simulate("keyDown", {keyCode: KeyCodes.enter});
+        wrapper.find("input").simulate("change", { target: { value: newTagName } });
+        wrapper.find("input").simulate("keyDown", { keyCode: KeyCodes.enter });
         expect(onChangeHandler).toBeCalled();
         expect(wrapper.find(TagsInput).state().tags).toHaveLength(originalTags.length + 1);
         const newTagIndex = originalTags.length;
@@ -76,8 +76,8 @@ describe("Tags Input Component", () => {
             onChange: onChangeHandler,
         });
         const newTagName = "My new tag";
-        wrapper.find("input").simulate("change", {target: {value: newTagName}});
-        wrapper.find("input").simulate("keyDown", {keyCode: KeyCodes.comma});
+        wrapper.find("input").simulate("change", { target: { value: newTagName } });
+        wrapper.find("input").simulate("keyDown", { keyCode: KeyCodes.comma });
         expect(onChangeHandler).toBeCalled();
         expect(wrapper.find(TagsInput).state().tags).toHaveLength(originalTags.length + 1);
         const newTagIndex = originalTags.length;
@@ -113,7 +113,7 @@ describe("Tags Input Component", () => {
         });
         // Root component calls handleDelete when backspace is pressed
         // Component should handle backspace and return, not deleting and not calling onChange
-        wrapper.find("input").simulate("keyDown", {keyCode: KeyCodes.backspace}); // backspace
+        wrapper.find("input").simulate("keyDown", { keyCode: KeyCodes.backspace }); // backspace
         expect(onChangeHandler).not.toBeCalled();
         expect(wrapper.find(TagsInput).state().tags).toHaveLength(originalTags.length);
     });
@@ -134,7 +134,7 @@ describe("Tags Input Component", () => {
         });
         wrapper.find("div.tag")
             .first()
-            .simulate("click", { target: { innerText: originalTags[0].name}});
+            .simulate("click", { target: { innerText: originalTags[0].name } });
         expect(onTagClickHandler).toBeCalledWith(originalTags[0]);
         expect(onShiftClickHandler).not.toBeCalled();
         expect(onCtrlClickHandler).not.toBeCalled();
@@ -157,7 +157,7 @@ describe("Tags Input Component", () => {
         });
         wrapper.find("div.tag")
             .first()
-            .simulate("click", { target: { innerText: originalTags[0].name}, ctrlKey: true});
+            .simulate("click", { target: { innerText: originalTags[0].name }, ctrlKey: true });
         expect(onCtrlClickHandler).toBeCalledWith(originalTags[0]);
         expect(onTagClickHandler).not.toBeCalled();
         expect(onShiftClickHandler).not.toBeCalled();
@@ -180,7 +180,7 @@ describe("Tags Input Component", () => {
         });
         wrapper.find("div.tag")
             .first()
-            .simulate("click", { target: { innerText: originalTags[0].name}, shiftKey: true});
+            .simulate("click", { target: { innerText: originalTags[0].name }, shiftKey: true });
         expect(onShiftClickHandler).toBeCalledWith(originalTags[0]);
         expect(onTagClickHandler).not.toBeCalled();
         expect(onCtrlClickHandler).not.toBeCalled();
@@ -203,7 +203,7 @@ describe("Tags Input Component", () => {
         });
         wrapper.find("div.tag")
             .first()
-            .simulate("click", { target: { innerText: originalTags[0].name}, ctrlKey: true, shiftKey: true});
+            .simulate("click", { target: { innerText: originalTags[0].name }, ctrlKey: true, shiftKey: true });
         expect(onCtrlShiftClickHandler).toBeCalledWith(originalTags[0]);
         expect(onTagClickHandler).not.toBeCalled();
         expect(onCtrlClickHandler).not.toBeCalled();

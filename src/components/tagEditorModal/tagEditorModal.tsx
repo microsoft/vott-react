@@ -59,7 +59,7 @@ export interface ITagEditorModalState {
 /**
  * Simple modal for editing the name and color of project tags
  */
-export default class TagEditorModal extends React.Component<ITagEditorModalProps, ITagEditorModalState> {
+export class TagEditorModal extends React.Component<ITagEditorModalProps, ITagEditorModalState> {
 
     private tagColors: {[id: string]: string};
 
