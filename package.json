@@ -18,6 +18,7 @@
     "scripts": {
         "start": "react-scripts start",
         "lint": "tslint 'src/**/*.ts*'",
+        "compile": "tsc",
         "pretest": "npm run lint",
         "test": "react-scripts test --env=jsdom --silent",
         "test:ci": "set CI=true && npm run test",
