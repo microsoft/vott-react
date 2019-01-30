@@ -1,4 +1,6 @@
 import * as React from "react";
+import * as PropTypes from "prop-types";
+
 import Form from "react-jsonschema-form";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { ITag } from "../../models/models";
@@ -184,4 +186,43 @@ export class TagEditorModal extends React.Component<ITagEditorModalProps, ITagEd
             },
         };
     }
+}
+
+TagEditorModal.propTypes = {
+    /** Function to call when "Ok" button is clicked */
+    onOk: PropTypes.string.isRequired,
+
+    /** Dictionary of colors indexed by color name, value is color code */
+    tagColors: PropTypes.string,
+    /** Allows for substitution of English word "Tag" */
+    tagNameText: PropTypes.string,
+    /** Allows for substitution of English word "Color" */
+    tagColorText: PropTypes.string,
+    /** Allows for substitution of English words "Edit Tag" */
+    editTagText: PropTypes.string,
+    /** Allows for substitution of English word "Save" */
+    saveText: PropTypes.string,
+    /** Allows for substitution of English word "Cancel" */
+    cancelText: PropTypes.string,
+
+    /** Modal is visible. Won't have tag unless `open` is called with tag */
+    show: PropTypes.bool,
+    /** Function to call when "Cancel" button is clicked or modal closed */
+    onCancel: PropTypes.func,
+}
+
+TagEditorModal.defaultProps = {
+    onOk: "none",
+
+    tagColors: "[White, Gray, Red, Maroon" +
+        ", Yellow, Olive, Lime, Green, Aqua, " +
+        "Teal, Blue, Navy, Fuschia, Purple]",
+    tagNameText: "Tag",
+    editTagText: "Edit Tag",
+    tagColorText: "Color",
+    saveText: "Save",
+    cancelText: "Cancel",
+
+    show: "none",
+    onCancel: "none",
 }

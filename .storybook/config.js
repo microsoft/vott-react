@@ -1,6 +1,10 @@
 import { addDecorator } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
-import { configure } from "@storybook/react";
+import { configure, setAddon } from "@storybook/react";
+import addWithDoc from 'storybook-addon-props';
+
+setAddon(addWithDoc);
+
 // automatically import all files ending in *.stories.tsx
 const req = require.context("../stories", true, /.stories.tsx$/);
 
