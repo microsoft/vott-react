@@ -14,8 +14,8 @@
         "url": "http://github.com/Microsoft/vott-react"
     },
     "dependencies": {
-        "react-docgen": "^3.0.0",
-        "react-docgen-typescript-loader": "^3.0.1",
+        "babel-plugin-react-docgen": "^2.0.2",
+        "prop-types": "^15.6.2",
         "react-jsonschema-form": "^1.2.0",
         "react-tag-input": "^6.1.0",
         "reactstrap": "^6.5.0"
