@@ -68,6 +68,39 @@ export interface ITagsInputState {
  */
 export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState> {
 
+    static propTypes = {
+        /** ITag[] or stringified ITag[] */
+        tags: PropTypes.array.isRequired,
+        /** Function to call on tags change */
+        onChange: PropTypes.node.isRequired,
+    
+        /** Place holder for input text box. */
+        placeHolder: PropTypes.string,
+        /** Key code delimiters for creating a new tag */
+        delimiters: PropTypes.oneOf(['enter', 'comma']),
+        /** Function to call on clicking individual tag */
+        onTagClick: PropTypes.func,
+        /** Function to call on clicking individual tag while holding CTRL key */
+        onCtrlTagClick: PropTypes.element,
+        /** Function to call on clicking individual tag while holding Shift key */
+        onShiftTagClick: PropTypes.arrayOf(PropTypes.number),
+        /** Function to call on clicking individual tag while holding CTRL and Shift keys */
+        onCtrlShiftTagClick: PropTypes.object,
+    }
+    
+    static defaultProps = {
+        tags: "none",
+        onChange: "none",
+    
+        placeHolder: "Add new tag",
+        delimiters: "[KeyCodes.comma, KeyCodes.enter]",
+        onTagClick: "none",
+        onCtrlTagClick: "none",
+        onShiftTagClick: "none",
+        onCtrlShiftTagClick: "none",
+    
+    }
+
     private tagColors: {[id: string]: string};
     private tagColorKeys: string[];
 
@@ -351,37 +384,4 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
             color: tag.color,
         };
     }
-}
-
-TagsInput.propTypes = {
-    /** ITag[] or stringified ITag[] */
-    tags: PropTypes.array.isRequired,
-    /** Function to call on tags change */
-    onChange: PropTypes.node.isRequired,
-
-    /** Place holder for input text box. */
-    placeHolder: PropTypes.string,
-    /** Key code delimiters for creating a new tag */
-    delimiters: PropTypes.oneOf(['enter', 'comma']),
-    /** Function to call on clicking individual tag */
-    onTagClick: PropTypes.func,
-    /** Function to call on clicking individual tag while holding CTRL key */
-    onCtrlTagClick: PropTypes.element,
-    /** Function to call on clicking individual tag while holding Shift key */
-    onShiftTagClick: PropTypes.arrayOf(PropTypes.number),
-    /** Function to call on clicking individual tag while holding CTRL and Shift keys */
-    onCtrlShiftTagClick: PropTypes.object,
-}
-
-TagsInput.defaultProps = {
-    tags: "none",
-    onChange: "none",
-
-    placeHolder: "Add new tag",
-    delimiters: "[KeyCodes.comma, KeyCodes.enter]",
-    onTagClick: "none",
-    onCtrlTagClick: "none",
-    onShiftTagClick: "none",
-    onCtrlShiftTagClick: "none",
-
 }
