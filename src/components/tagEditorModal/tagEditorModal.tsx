@@ -96,10 +96,7 @@ export class TagEditorModal extends React.Component<ITagEditorModalProps, ITagEd
         editTagText: "Edit Tag",
         tagColorText: "Color",
         saveText: "Save",
-        cancelText: "Cancel",
-    
-        show: "none",
-        onCancel: "none",
+        cancelText: "Cancel"
     }
 
     private tagColors: {[id: string]: string};

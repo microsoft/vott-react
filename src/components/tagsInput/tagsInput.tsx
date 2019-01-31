@@ -72,12 +72,12 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
         /** ITag[] or stringified ITag[] */
         tags: PropTypes.array.isRequired,
         /** Function to call on tags change */
-        onChange: PropTypes.node.isRequired,
+        onChange: PropTypes.string.isRequired,
     
         /** Place holder for input text box. */
         placeHolder: PropTypes.string,
         /** Key code delimiters for creating a new tag */
-        delimiters: PropTypes.oneOf(['enter', 'comma']),
+        delimiters: PropTypes.array,
         /** Function to call on clicking individual tag */
         onTagClick: PropTypes.func,
         /** Function to call on clicking individual tag while holding CTRL key */
@@ -89,16 +89,11 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
     }
     
     static defaultProps = {
-        tags: "none",
-        onChange: "none",
+        tags: [],
+        onChange: (tags: ITag[]) => { return; },
     
         placeHolder: "Add new tag",
-        delimiters: "[KeyCodes.comma, KeyCodes.enter]",
-        onTagClick: "none",
-        onCtrlTagClick: "none",
-        onShiftTagClick: "none",
-        onCtrlShiftTagClick: "none",
-    
+        delimiters: ['KeyCodes.comma', 'KeyCodes.enter']
     }
 
     private tagColors: {[id: string]: string};
