@@ -61,28 +61,39 @@ export interface ITagEditorModalState {
  * Simple modal for editing the name and color of project tags
  */
 export class TagEditorModal extends React.Component<ITagEditorModalProps, ITagEditorModalState> {
-    private tagColors: { [id: string]: string };
-
-    constructor(props: ITagEditorModalProps) {
-        super(props);
-
-        this.tagColors = props.tagColors || defaultValues.tagColors;
-
-        this.state = {
-            originalTag: null,
-            currentTag: null,
-            isOpen: props.show,
-            formSchema: this.createFormSchema(
-                this.tagColors,
-                this.props.tagNameText || defaultValues.tagNameText,
-                this.props.tagColorText || defaultValues.tagColorText),
+    private static createFormSchema = (colors: { [id: string]: string }, tagNameText: string, tagColorText: string) => {
+        const keys = Object.keys(colors);
+        const values: string[] = [];
+        for (const key of keys) {
+            values.push(colors[key]);
+        }
+        return {
+            type: "object",
+            properties: {
+                name: {
+                    title: tagNameText,
+                    type: "string",
+                },
+                color: {
+                    title: tagColorText,
+                    type: "string",
+                    enum: values,
+                    default: values[0],
+                    enumNames: keys,
+                },
+            },
         };
-
-        this.handleFormChange = this.handleFormChange.bind(this);
-        this.handleOk = this.handleOk.bind(this);
-        this.open = this.open.bind(this);
-        this.close = this.close.bind(this);
     }
+
+    public state: ITagEditorModalState = {
+        originalTag: null,
+        currentTag: null,
+        isOpen: this.props.show,
+        formSchema: TagEditorModal.createFormSchema(
+            this.props.tagColors || defaultValues.tagColors,
+            this.props.tagNameText || defaultValues.tagNameText,
+            this.props.tagColorText || defaultValues.tagColorText),
+    };
 
     public render() {
         const closeBtn = <button className="close" onClick={this.close}>&times;</button>;
@@ -121,7 +132,7 @@ export class TagEditorModal extends React.Component<ITagEditorModalProps, ITagEd
      * Open editor modal with tag
      * @param tag Tag to be edited
      */
-    public open(tag: ITag): void {
+    public open = (tag: ITag): void => {
         this.setState({
             isOpen: true,
             originalTag: tag,
@@ -132,7 +143,7 @@ export class TagEditorModal extends React.Component<ITagEditorModalProps, ITagEd
     /**
      * Close editor modal and call `onCancel` if provided
      */
-    public close(): void {
+    public close = (): void => {
         this.setState({
             isOpen: false,
         }, () => {
@@ -145,7 +156,7 @@ export class TagEditorModal extends React.Component<ITagEditorModalProps, ITagEd
     /**
      * Called when change made to modal form
      */
-    private handleFormChange(args) {
+    private handleFormChange = (args): void => {
         this.setState({
             currentTag: {
                 name: args.formData.name,
@@ -157,31 +168,7 @@ export class TagEditorModal extends React.Component<ITagEditorModalProps, ITagEd
     /**
      * Called when "Ok" is clicked
      */
-    private handleOk(e) {
+    private handleOk = (e): void => {
         this.props.onOk(this.state.originalTag, this.state.currentTag);
-    }
-
-    private createFormSchema(colors: { [id: string]: string }, tagNameText: string, tagColorText: string) {
-        const keys = Object.keys(colors);
-        const values: string[] = [];
-        for (const key of keys) {
-            values.push(colors[key]);
-        }
-        return {
-            type: "object",
-            properties: {
-                name: {
-                    title: tagNameText,
-                    type: "string",
-                },
-                color: {
-                    title: tagColorText,
-                    type: "string",
-                    enum: values,
-                    default: values[0],
-                    enumNames: keys,
-                },
-            },
-        };
     }
 }

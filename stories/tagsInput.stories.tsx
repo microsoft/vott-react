@@ -3,11 +3,12 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { wInfo } from "../.storybook/utils";
 
+import { ITag } from "../src/models/models";
 import { TagsInput } from "../src/components/tagsInput/tagsInput";
 import { TagEditorModal } from "../src/components/tagEditorModal/tagEditorModal";
 import "../src/components/tagsInput/tagsInput.scss";
 
-const tags = [{name: "Tag 1"}];
+const tags: ITag[] = [{ name: "Tag 1", color: "#FF0000" }];
 
 storiesOf("VoTT React", module).add(
     "TagsInputCell",
