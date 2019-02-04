@@ -1,6 +1,4 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
-
 import { WithContext as ReactTags } from "react-tag-input";
 import { KeyCodes, randomIntInRange } from "../../common/utils";
 import { ITag } from "../../models/models";
@@ -67,35 +65,6 @@ export interface ITagsInputState {
  * Component for creating, modifying and using tags
  */
 export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState> {
-
-    static propTypes = {
-        /** ITag[] or stringified ITag[] */
-        tags: PropTypes.array.isRequired,
-        /** Function to call on tags change */
-        onChange: PropTypes.func.isRequired,
-    
-        /** Place holder for input text box. */
-        placeHolder: PropTypes.string,
-        /** Key code delimiters for creating a new tag */
-        delimiters: PropTypes.array,
-        /** Function to call on clicking individual tag */
-        onTagClick: PropTypes.func,
-        /** Function to call on clicking individual tag while holding CTRL key */
-        onCtrlTagClick: PropTypes.func,
-        /** Function to call on clicking individual tag while holding Shift key */
-        onShiftTagClick: PropTypes.func,
-        /** Function to call on clicking individual tag while holding CTRL and Shift keys */
-        onCtrlShiftTagClick: PropTypes.func,
-    }
-    
-    static defaultProps = {
-        tags: [],
-        onChange: (tags: ITag[]) => { return; },
-    
-        placeHolder: "Add new tag",
-        delimiters: [KeyCodes.comma, KeyCodes.enter]
-    }
-
     private tagColors: {[id: string]: string};
     private tagColorKeys: string[];
 
