@@ -15,44 +15,45 @@ const defaultValues = {
 
 /**
  * Properties for Tag Editor Modal
- * @member onOk - Function to call when "Ok" button is clicked
- * @member tagColors - Dictionary of colors indexed by color name, value is color code.
- * Used to choose colors available to apply to tags
- * @member tagNameText - Allows for substitution of English word "Tag"
- * @member editTagText - Allows for substitution of English words "Edit Tag"
- * @member tagColorText - Allows for substitution of English word "Color"
- * @member saveText - Allows for substitution of English word "Save"
- * @member cancelText - Allows for substitution of English word "Cancel"
- * @member show - Modal is visible. Won't have tag unless `open` is called with tag
- * @member onCancel - Function to call when "Cancel" button is clicked or modal closed
  */
 export interface ITagEditorModalProps extends React.Props<TagEditorModal> {
+    /** Function to call when "Ok" button is clicked */
     onOk: (oldTag: ITag, newTag: ITag) => void;
 
-    // Props with default params
+    /**
+     * Dictionary of colors indexed by color name, value is color code.
+     * Used to choose colors available to apply to tags
+     */
     tagColors?: { [id: string]: string };
+    /** Allows for substitution of English word "Tag" */
     tagNameText?: string;
+    /** Allows for substitution of English word "Color" */
     tagColorText?: string;
+    /** Allows for substitution of English words "Edit Tag" */
     editTagText?: string;
+    /** Allows for substitution of English word "Save" */
     saveText?: string;
+    /** Allows for substitution of English word "Cancel" */
     cancelText?: string;
 
     // Optional
+    /** Modal is visible. Won't have tag unless `open` is called with tag */
     show?: boolean;
+    /** Function to call when "Cancel" button is clicked or modal closed */
     onCancel?: () => void;
 }
 
 /**
  * State for Tag Editor Modal
- * @member originalTag - Tag originally opened with
- * @member currentTag - Current tag as modified by modal
- * @member isOpen - Modal is open
- * @member formSchema - JSON form schema for modal body form
  */
 export interface ITagEditorModalState {
+    /**  Tag originally opened with */
     originalTag: ITag;
+    /** Current tag as modified by modal */
     currentTag: ITag;
+    /** Modal is open */
     isOpen: boolean;
+    /** JSON form schema for modal body form */
     formSchema: any;
 }
 

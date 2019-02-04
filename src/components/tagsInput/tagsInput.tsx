@@ -27,37 +27,35 @@ export interface IReactTag {
 
 /**
  * Properties required for TagsInput component
- * @member tags - ITag[] or stringified ITag[]
- * @member onChange - function to call on tags change
- * @member placeHolder - Place holder for input text box.
- * Default is "Add new tag"
- * @member delimiters - Key code delimiters for creating a new tag
- * Defaults are enter (13) and comma (188)
- * @member onTagClick - Function to call on clicking individual tag
- * @member onCtrlTagClick - Function to call on clicking individual tag while holding CTRL key
- * @member onShiftTagClick - Function to call on clicking individual tag while holding Shift key
- * @member onCtrlShiftTagClick - Function to call on clicking individual tag while holding CTRL and Shift keys
  */
 export interface ITagsInputProps extends React.Props<TagsInput> {
     tags: ITag[];
+    /** function to call on tags change */
     onChange: (tags: ITag[]) => void;
 
-    // Props with default values
+    /** Place holder for input text box.
+     * @default New Tag
+     */
     placeHolder?: string;
+    /** Key code delimiters for creating a new tag */
     delimiters?: number[];
+    /** Function to call on clicking individual tag */
     onTagClick?: (tag: ITag) => void;
+    /** Function to call on clicking individual tag while holding CTRL key */
     onCtrlTagClick?: (tag: ITag) => void;
+    /** Function to call on clicking individual tag while holding Shift key */
     onShiftTagClick?: (tag: ITag) => void;
+    /** Function to call on clicking individual tag while holding CTRL and Shift keys */
     onCtrlShiftTagClick?: (tag: ITag) => void;
 }
 
 /**
  * Current state of tags input component
- * @member tags - IReactTag[] - tags used in lower level component
- * @member currentTagColorIndex - rotates initial color to apply to tags
  */
 export interface ITagsInputState {
+    /** IReactTag[] - tags used in lower level component */
     tags: IReactTag[];
+    /** rotates initial color to apply to tags */
     currentTagColorIndex: number;
 }
 
@@ -65,7 +63,7 @@ export interface ITagsInputState {
  * Component for creating, modifying and using tags
  */
 export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState> {
-    private tagColors: {[id: string]: string};
+    private tagColors: { [id: string]: string };
     private tagColorKeys: string[];
 
     constructor(props) {
