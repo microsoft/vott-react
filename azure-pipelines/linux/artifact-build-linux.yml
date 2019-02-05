@@ -9,30 +9,11 @@ steps:
       versionSpec: 10.x
 
   - bash: |
-      set -ex
-
-      # clean install
       npm ci
-      npm run build
-
-      mkdir -p linux
-      cp -r dist/* linux/
-
-      npm run build
-
-    displayName: Build
-
-  - task: PublishBuildArtifacts@1
-    displayName: 'Publish Artifact: linux'
-    inputs:
-      PathtoPublish: linux
-      ArtifactName: linux
-
-  - bash: |
       npm run build
       npm install -g npm-cli-login
       npm-cli-login -u $(NPM_USER) -p $(NPM_PASS) -e $(NPM_EMAIL)
       npm publish
 
-    displayName: Publish
+    displayName: NPM Publish
 

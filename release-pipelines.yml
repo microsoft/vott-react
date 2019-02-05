@@ -1,5 +1,5 @@
-trigger: 
-  - master # disable CI build for branch except master
+trigger:
+  - refs/tags/v* # only run build on tag
 pr: none # disable CI build for PR
 
 jobs:
