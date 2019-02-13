@@ -23,11 +23,16 @@ describe("Tags Input Component", () => {
             onChange: onChangeHandler,
         });
         const stateTags = wrapper.find(TagsInput).state().tags;
+        const tagElements = wrapper.find(".tag");
+
         expect(stateTags).toHaveLength(originalTags.length);
+        expect(tagElements).toHaveLength(originalTags.length);
+
         for (let i = 0; i < stateTags.length; i++) {
             expect(stateTags[i].id).toEqual(originalTags[i].name);
             expect(stateTags[i].color).toEqual(originalTags[i].color);
             expect(stateTags[i].text).not.toBeNull();
+            expect(tagElements.at(i).getDOMNode().getAttribute("data-tag-name")).toEqual(originalTags[i].name);
         }
     });
 
