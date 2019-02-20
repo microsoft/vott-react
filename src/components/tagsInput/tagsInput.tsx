@@ -41,6 +41,8 @@ export interface ITagsInputProps extends React.Props<TagsInput> {
     placeHolder?: string;
     /** Key code delimiters for creating a new tag */
     delimiters?: number[];
+    /** Colors for tags */
+    tagColors?: { [id: string]: string };
     /** Function to call on clicking individual tag */
     onTagClick?: (tag: ITag) => void;
     /** Function to call on clicking individual tag while holding CTRL key */
@@ -67,12 +69,10 @@ export interface ITagsInputState {
  * Component for creating, modifying and using tags
  */
 export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState> {
-    private static tagColors: { [id: string]: string } = defaultValues.tagColors;
-    private static tagColorKeys: string[] = Object.keys(TagsInput.tagColors);
 
     public state: ITagsInputState = {
         tags: this.props.tags,
-        currentTagColorIndex: randomIntInRange(0, TagsInput.tagColorKeys.length),
+        currentTagColorIndex: 0,
     };
 
     public render() {
@@ -90,6 +90,12 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
                     delimiters={this.props.delimiters || defaultValues.delimiters} />
             </div>
         );
+    }
+
+    public componentDidMount() {
+        this.setState({
+            currentTagColorIndex: randomIntInRange(0, this.getTagColorKeys().length),
+        })
     }
 
     public componentDidUpdate(prevProps: ITagsInputProps) {
@@ -134,6 +140,14 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
             return this.props.getTagSpan(name, this.getTagIndex(name));
         }
         return <span>{name}</span>;
+    }
+
+    private getTagColorKeys = (): string[] => {
+        return Object.keys(this.getTagColors());
+    }
+
+    private getTagColors = (): {[id: string]: string} => {
+        return this.props.tagColors || defaultValues.tagColors;
     }
 
     private getTagIndex = (name: string) => {
@@ -228,11 +242,14 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
      * @param reactTag - IReactTag - new tag to add to state
      */
     private handleAddition = (reactTag: IReactTag): void => {
-        reactTag.color = TagsInput.tagColors[TagsInput.tagColorKeys[this.state.currentTagColorIndex]];
+        const tag = this.toItag(reactTag);
+        const tagColors = this.getTagColors();
+        const tagColorKeys = Object.keys(tagColors);
+        tag.color = tagColors[tagColorKeys[this.state.currentTagColorIndex]];
         this.setState((prevState) => {
             return {
-                tags: [...this.state.tags, this.toItag(reactTag)],
-                currentTagColorIndex: (prevState.currentTagColorIndex + 1) % TagsInput.tagColorKeys.length,
+                tags: [...this.state.tags, tag],
+                currentTagColorIndex: (prevState.currentTagColorIndex + 1) % tagColorKeys.length,
             };
         }, () => this.props.onChange(this.state.tags));
     }

@@ -222,7 +222,7 @@ describe("Tags Input Component", () => {
             getTagSpan,
         });
         await MockFactory.flushUi();
-        expect(getTagSpan).toBeCalledTimes(originalTags.length);
+        expect(getTagSpan).toBeCalledTimes(originalTags.length * 2); // Should run twice with componentDidMount
         expect(wrapper.find("div.tag").first().text()).toEqual(`${originalTags[0].name}-0`);
     });
 });
