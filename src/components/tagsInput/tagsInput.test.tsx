@@ -25,9 +25,7 @@ describe("Tags Input Component", () => {
         const stateTags = wrapper.find(TagsInput).state().tags;
         expect(stateTags).toHaveLength(originalTags.length);
         for (let i = 0; i < stateTags.length; i++) {
-            expect(stateTags[i].id).toEqual(originalTags[i].name);
-            expect(stateTags[i].color).toEqual(originalTags[i].color);
-            expect(stateTags[i].text).not.toBeNull();
+            expect(stateTags[i]).toEqual(originalTags[i]);
         }
     });
 
@@ -61,7 +59,7 @@ describe("Tags Input Component", () => {
         expect(onChangeHandler).toBeCalled();
         expect(wrapper.find(TagsInput).state().tags).toHaveLength(originalTags.length + 1);
         const newTagIndex = originalTags.length;
-        expect(wrapper.find(TagsInput).state().tags[newTagIndex].id).toEqual(newTagName);
+        expect(wrapper.find(TagsInput).state().tags[newTagIndex].name).toEqual(newTagName);
         const colorValues: string[] = [];
         for (const key of Object.keys(tagColors)) {
             colorValues.push(tagColors[key]);
@@ -81,7 +79,7 @@ describe("Tags Input Component", () => {
         expect(onChangeHandler).toBeCalled();
         expect(wrapper.find(TagsInput).state().tags).toHaveLength(originalTags.length + 1);
         const newTagIndex = originalTags.length;
-        expect(wrapper.find(TagsInput).state().tags[newTagIndex].id).toEqual(newTagName);
+        expect(wrapper.find(TagsInput).state().tags[newTagIndex].name).toEqual(newTagName);
 
         const colorValues: string[] = [];
         for (const key of Object.keys(tagColors)) {
@@ -101,7 +99,7 @@ describe("Tags Input Component", () => {
             .last().simulate("click");
         expect(onChangeHandler).toBeCalled();
         expect(wrapper.find(TagsInput).state().tags).toHaveLength(originalTags.length - 1);
-        expect(wrapper.find(TagsInput).state().tags[0].id).toEqual(originalTags[0].name);
+        expect(wrapper.find(TagsInput).state().tags[0].name).toEqual(originalTags[0].name);
         expect(wrapper.find(TagsInput).state().tags[0].color).toEqual(originalTags[0].color);
     });
 
@@ -208,5 +206,18 @@ describe("Tags Input Component", () => {
         expect(onTagClickHandler).not.toBeCalled();
         expect(onCtrlClickHandler).not.toBeCalled();
         expect(onShiftClickHandler).not.toBeCalled();
+    });
+
+    it("Renders with provided getTagSpan", async () => {
+        const getTagSpan = jest.fn((name, index) => `${name}-${index}`);
+        const onChangeHandler = jest.fn();
+        const wrapper = createComponent({
+            tags: originalTags,
+            onChange: onChangeHandler,
+            getTagSpan,
+        });
+        await MockFactory.flushUi();
+        expect(getTagSpan).toBeCalledTimes(originalTags.length);
+        expect(wrapper.find("div.tag").first().text()).toEqual(`${originalTags[0].name}-0`);
     });
 });

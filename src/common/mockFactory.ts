@@ -25,6 +25,19 @@ export default class MockFactory {
     }
 
     /**
+     * Runs function that updates the UI, and flushes call stack
+     * @param func - The function that updates the UI
+     */
+    public static flushUi(func: () => void = null): Promise<void> {
+        return new Promise<void>((resolve) => {
+            if (func) {
+                func();
+            }
+            setImmediate(resolve);
+        });
+    }
+
+    /**
      * Generates a random color string
      */
     private static randomColor(): string {
