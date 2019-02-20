@@ -1,4 +1,6 @@
-import * as React from "react";
+import React, { SyntheticEvent } from "react";
+import PropTypes from "prop-types";
+
 import { WithContext as ReactTags } from "react-tag-input";
 import { KeyCodes, randomIntInRange } from "../../common/utils";
 import { ITag } from "../../models/models";
@@ -176,11 +178,9 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
      * Gets tag ID (name) from a click event
      * @param event Click event
      */
-    private getTagIdFromClick = (event): string => {
-        if (event.target.lastChild) {
-            return event.target.lastChild.data;
-        }
-        return (event.target.innerText || event.currentTarget.innerText).trim();
+    private getTagIdFromClick(event: SyntheticEvent): string {
+        const attrValue = event.currentTarget.getAttribute("data-tag-name");
+        return attrValue ? attrValue.trim() : null;
     }
 
     /**
@@ -190,7 +190,7 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
      */
     private ReactTagHtml = (name: string, color: string) => {
         return (
-            <div className="tag inline-block" onClick={this.handleTagClick}>
+            <div className="tag inline-block" data-tag-name={name} onClick={(event) => this.handleTagClick(event)}>
                 <div className="tag-contents">
                     <div className="tag-color-box" style={{ backgroundColor: color }}></div>
                     {this.getTagSpan(name)}
