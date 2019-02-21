@@ -34,6 +34,7 @@
     "scripts": {
         "start": "react-scripts start",
         "lint": "tslint 'src/**/*.ts*'",
+        "lintfix": "tslint 'src/**/*.ts*' --fix",
         "compile": "tsc",
         "pretest": "npm run lint",
         "test": "react-scripts test --env=jsdom --silent",
