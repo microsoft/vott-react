@@ -1,6 +1,6 @@
 {
     "name": "vott-react",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "author": "VOTT Team vott@microsoft.com>",
     "description": "Reusable React components originally designed for VOTT app",
     "license": "MIT",
