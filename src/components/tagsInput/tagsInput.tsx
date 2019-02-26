@@ -52,7 +52,7 @@ export interface ITagsInputProps extends React.Props<TagsInput> {
     /** Function to call on clicking individual tag while holding CTRL and Shift keys */
     onCtrlShiftTagClick?: (tag: ITag) => void;
     /** Function to render span of text within each tag */
-    getTagSpan?: (name: string, tagIndex?: number) => Element;
+    getTagSpan?: (name: string, tagIndex?: number) => any;
 }
 
 /**
