@@ -72,6 +72,20 @@ describe("Tags Input Component", () => {
         expect(colorValues).toContain(wrapper.find(TagsInput).state().tags[newTagIndex].color);
     });
 
+    it("create a new tag with no existing tags", () => {
+        const onChangeHandler = jest.fn();
+        const wrapper = createComponent({
+            tags: null,
+            onChange: onChangeHandler,
+        });
+        const newTagName = "My new tag"
+        wrapper.find("input").simulate("change", { target: { value: newTagName } });
+        wrapper.find("input").simulate("keyDown", { keyCode: KeyCodes.enter });
+        expect(onChangeHandler).toBeCalled();
+        expect(wrapper.find(TagsInput).state().tags).toHaveLength(1);
+        expect(wrapper.find(TagsInput).state().tags[0].name).toEqual(newTagName);
+    });
+
     it("create a new tag from text box - comma key", () => {
         const onChangeHandler = jest.fn();
         const wrapper = createComponent({
