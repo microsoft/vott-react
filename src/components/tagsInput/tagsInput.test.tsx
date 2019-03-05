@@ -78,7 +78,7 @@ describe("Tags Input Component", () => {
             tags: null,
             onChange: onChangeHandler,
         });
-        const newTagName = "My new tag"
+        const newTagName = "My new tag";
         wrapper.find("input").simulate("change", { target: { value: newTagName } });
         wrapper.find("input").simulate("keyDown", { keyCode: KeyCodes.enter });
         expect(onChangeHandler).toBeCalled();
