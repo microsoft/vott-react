@@ -1,6 +1,6 @@
 {
     "name": "vott-react",
-    "version": "0.2.5",
+    "version": "0.2.7",
     "author": "VOTT Team vott@microsoft.com>",
     "description": "Reusable React components originally designed for VOTT app",
     "license": "MIT",
@@ -39,7 +39,7 @@
         "pretest": "npm run lint",
         "test": "react-scripts test --env=jsdom --silent",
         "test:ci": "set CI=true && npm run test",
-        "test:coverage": "react-scripts test --coverage",
+        "test:coverage": "npm run test -- --coverage",
         "eject": "react-scripts eject",
         "clean": "rm -rf dist",
         "prebuild": "npm run lint",

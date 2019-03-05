@@ -95,7 +95,7 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
     public componentDidMount() {
         this.setState({
             currentTagColorIndex: randomIntInRange(0, this.getTagColorKeys().length),
-        })
+        });
     }
 
     public componentDidUpdate(prevProps: ITagsInputProps) {
