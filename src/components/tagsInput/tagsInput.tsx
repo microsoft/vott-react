@@ -246,9 +246,10 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
         const tagColors = this.getTagColors();
         const tagColorKeys = Object.keys(tagColors);
         tag.color = tagColors[tagColorKeys[this.state.currentTagColorIndex]];
+        const currentTags = (this.state.tags && this.state.tags.length) ? this.state.tags : [];
         this.setState((prevState) => {
             return {
-                tags: [...this.state.tags, tag],
+                tags: [...currentTags, tag],
                 currentTagColorIndex: (prevState.currentTagColorIndex + 1) % tagColorKeys.length,
             };
         }, () => this.props.onChange(this.state.tags));
