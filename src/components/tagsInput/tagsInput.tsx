@@ -80,7 +80,9 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
 
         return (
             <div>
-                <ReactTags tags={this.toReactTags(this.state.tags)}
+                <ReactTags
+                    ref={"reactTagsInput"}
+                    tags={this.toReactTags(this.state.tags)}
                     placeholder={this.props.placeHolder || defaultValues.placeHolder}
                     autofocus={false}
                     allowAdditionFromPaste={false}
@@ -88,7 +90,8 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
                     handleAddition={this.handleAddition}
                     handleDrag={this.handleDrag}
                     id={"tagInputField"}
-                    delimiters={this.props.delimiters || defaultValues.delimiters} />
+                    delimiters={this.props.delimiters || defaultValues.delimiters} 
+                />
             </div>
         );
     }
