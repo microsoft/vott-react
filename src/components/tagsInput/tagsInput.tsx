@@ -165,7 +165,7 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
         const tag: ITag = this.getTag(text);
         if (this.props.onCtrlShiftTagClick && event.ctrlKey && event.shiftKey) {
             this.props.onCtrlShiftTagClick(tag);
-        } else if (this.props.onCtrlTagClick && event.ctrlKey) {
+        } else if (this.props.onCtrlTagClick && (event.ctrlKey || event.metaKey)) {
             this.props.onCtrlTagClick(tag);
         } else if (this.props.onShiftTagClick && event.shiftKey) {
             this.props.onShiftTagClick(tag);
