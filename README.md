@@ -41,6 +41,19 @@ We welcome issues and pull requests into the project. We ask that you follow the
 
 Try to keep PRs small to decrease the time required to review and merge
 
+# Publishing new version to NPM
+1. Create PR to bump version number in `package.json`
+1. Merge PR
+1. Pull latest `master`
+1. Tag `master` with syntax `v*`, push tag
+    ```bash
+    git checkout master
+    git pull
+    git tag v0.2.10
+    git push origin v0.2.10
+    ```
+1. Pipeline will automatically publish to NPM
+
 Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit https://cla.microsoft.com.
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
