@@ -90,7 +90,7 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
                     handleAddition={this.handleAddition}
                     handleDrag={this.handleDrag}
                     id={"tagInputField"}
-                    delimiters={this.props.delimiters || defaultValues.delimiters} 
+                    delimiters={this.props.delimiters || defaultValues.delimiters}
                 />
             </div>
         );
