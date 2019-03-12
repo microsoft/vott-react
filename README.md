@@ -1,7 +1,5 @@
-[![Build Status](https://dev.azure.com/msft-vott/VoTT/_apis/build/status/vott-react-CI?branchName=master)](https://dev.azure.com/msft-vott/VoTT/_build/latest?definitionId=8&branchName=master)
-
+[![Build Status](https://dev.azure.com/msft-vott/VoTT/_apis/build/status/Microsoft.vott-react?branchName=master)](https://dev.azure.com/msft-vott/VoTT/_build/latest?definitionId=26&branchName=master)
 [![Code Coverage](https://codecov.io/gh/Microsoft/vott-react/branch/master/graph/badge.svg)](https://codecov.io/gh/Microsoft/vott-react)
-
 [![npm version](https://badge.fury.io/js/vott-react.svg)](https://badge.fury.io/js/vott-react)
 
 # vott-react
