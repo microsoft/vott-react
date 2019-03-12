@@ -80,14 +80,18 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
 
         return (
             <div>
-                <ReactTags tags={this.toReactTags(this.state.tags)}
+                <ReactTags
+                    ref={"reactTagsInput"}
+                    tags={this.toReactTags(this.state.tags)}
                     placeholder={this.props.placeHolder || defaultValues.placeHolder}
                     autofocus={false}
                     allowAdditionFromPaste={false}
                     handleDelete={this.handleDelete}
                     handleAddition={this.handleAddition}
                     handleDrag={this.handleDrag}
-                    delimiters={this.props.delimiters || defaultValues.delimiters} />
+                    id={"tagInputField"}
+                    delimiters={this.props.delimiters || defaultValues.delimiters}
+                />
             </div>
         );
     }
@@ -245,6 +249,7 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
      */
     private handleAddition = (reactTag: IReactTag): void => {
         const tag = this.toItag(reactTag);
+        const inputElement = document.querySelector(".ReactTags__tagInputField") as HTMLElement;
         const tagColors = this.getTagColors();
         const tagColorKeys = Object.keys(tagColors);
         tag.color = tagColors[tagColorKeys[this.state.currentTagColorIndex]];
@@ -255,6 +260,9 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
                 currentTagColorIndex: (prevState.currentTagColorIndex + 1) % tagColorKeys.length,
             };
         }, () => this.props.onChange(this.state.tags));
+        if (inputElement) {
+            setImmediate(() => inputElement.focus());
+        }
     }
 
     /**
