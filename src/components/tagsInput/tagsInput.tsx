@@ -247,6 +247,7 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
      */
     private handleAddition = (reactTag: IReactTag): void => {
         const tag = this.toItag(reactTag);
+        const inputElement = document.querySelector(".ReactTags__tagInputField") as HTMLElement;
         const tagColors = this.getTagColors();
         const tagColorKeys = Object.keys(tagColors);
         tag.color = tagColors[tagColorKeys[this.state.currentTagColorIndex]];
@@ -257,6 +258,9 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
                 currentTagColorIndex: (prevState.currentTagColorIndex + 1) % tagColorKeys.length,
             };
         }, () => this.props.onChange(this.state.tags));
+        if (inputElement) {
+            setImmediate(() => inputElement.focus());
+        }
     }
 
     /**
