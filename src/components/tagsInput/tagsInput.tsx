@@ -176,6 +176,7 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
         } else if (this.props.onTagClick) {
             this.props.onTagClick(tag);
         }
+        this.blurInput();
     }
 
     // Helpers
@@ -236,6 +237,7 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
         this.setState({
             tags: newTags,
         }, () => this.props.onChange(this.state.tags));
+        this.blurInput();
     }
 
     // Tag Operations
@@ -281,6 +283,7 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
         this.setState({
             tags,
         }, () => this.props.onChange(this.state.tags));
+        this.blurInput();
     }
 
     /**
@@ -334,5 +337,12 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
             name: tag.id,
             color: tag.color,
         };
+    }
+
+    private blurInput = () => {
+        const inputElement = document.querySelector(".ReactTags__tagInputField") as HTMLElement;
+        if (inputElement) {
+            setImmediate(() => inputElement.blur());
+        }
     }
 }
