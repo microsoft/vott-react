@@ -45,6 +45,8 @@ export interface ITagsInputProps extends React.Props<TagsInput> {
     tagColors?: { [id: string]: string };
     /** Function to call on clicking individual tag */
     onTagClick?: (tag: ITag) => void;
+    /** Function to call on tag delete */
+    onTagDelete?: (tag: ITag) => void;
     /** Function to call on clicking individual tag while holding CTRL key */
     onCtrlTagClick?: (tag: ITag) => void;
     /** Function to call on clicking individual tag while holding Shift key */
@@ -274,6 +276,10 @@ export class TagsInput extends React.Component<ITagsInputProps, ITagsInputState>
     private handleDelete = (i: number, event): void => {
         if (event.keyCode === KeyCodes.backspace) {
             return;
+        }
+        const deletedTag = this.state.tags[i];
+        if (this.props.onTagDelete) {
+            this.props.onTagDelete(deletedTag);
         }
         const tags = this.state.tags.filter((tag, index) => index !== i);
 

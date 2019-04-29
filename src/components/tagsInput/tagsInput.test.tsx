@@ -109,17 +109,21 @@ describe("Tags Input Component", () => {
 
     it("remove a tag", () => {
         const onChangeHandler = jest.fn();
+        const onDelete = jest.fn();
         const wrapper = createComponent({
             tags: originalTags,
             onChange: onChangeHandler,
+            onTagDelete: onDelete,
         });
         expect(wrapper.find(TagsInput).state().tags).toHaveLength(originalTags.length);
+        const lastTag = originalTags[originalTags.length - 1];
         wrapper.find("a.ReactTags__remove")
             .last().simulate("click");
         expect(onChangeHandler).toBeCalled();
         expect(wrapper.find(TagsInput).state().tags).toHaveLength(originalTags.length - 1);
         expect(wrapper.find(TagsInput).state().tags[0].name).toEqual(originalTags[0].name);
         expect(wrapper.find(TagsInput).state().tags[0].color).toEqual(originalTags[0].color);
+        expect(onDelete).toBeCalledWith(lastTag);
     });
 
     it("typing backspace on empty field does NOT delete tag", () => {
