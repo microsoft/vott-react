@@ -63,7 +63,7 @@
         "@storybook/addon-actions": "^4.1.11",
         "@storybook/addon-info": "^4.1.11",
         "@storybook/addon-links": "^4.1.11",
-        "@storybook/react": "^4.1.11",
+        "@storybook/react": "^7.0.7",
         "@types/enzyme": "^3.1.15",
         "@types/jest": "^23.3.13",
         "@types/node": "10.12.18",
